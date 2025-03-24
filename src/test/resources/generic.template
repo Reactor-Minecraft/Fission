@@ -1,0 +1,6 @@
+amount: $ANIMALS_COUNT
+
+animals: [
+  {MONKEY}
+  {DRAGON}
+  {ELEPHANT}]
