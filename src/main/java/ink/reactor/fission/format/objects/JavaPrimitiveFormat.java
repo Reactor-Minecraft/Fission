@@ -15,7 +15,13 @@ public final class JavaPrimitiveFormat {
     }
 
     public static void addBooleanFormat(final Map<Class<?>, JavaFormateable> formateable) {
-        formateable.put(Boolean.class, (object, options, builder, values) -> builder.append((object instanceof Boolean boolean1) ? boolean1 : false));
+        formateable.put(Boolean.class, (object, options, builder, values) -> {
+            if (object instanceof Boolean boolean1) {
+                builder.append(boolean1.booleanValue());
+            } else {
+                builder.append((object instanceof Boolean boolean1) ? boolean1.booleanValue() : false);
+            }
+        });
     }
 
     public static void addNumbersFormat(final Map<Class<?>, JavaFormateable> formateable) {
