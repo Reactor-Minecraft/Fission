@@ -77,6 +77,11 @@ public class JavaMethodWriter {
         writeParameters(method, builder, options);
 
         builder.append(')');
+
+        if (method.getExceptionThrows() != null) {
+            builder.append(" throws ");
+            builder.append(method.getExceptionThrows());
+        }
     }
 
     public void writeParameters(final JavaMethod method, final StringBuilder builder, final JavaFormatOptions options) {

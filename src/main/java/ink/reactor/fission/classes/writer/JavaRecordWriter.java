@@ -72,8 +72,8 @@ public class JavaRecordWriter extends JavaClassWriter {
             }
 
             builder.repeat(' ', options.getSpacesInNewLine());
-            options.getFieldWriter().writeContent(javaField, builder, options);
-
+            options.getFieldWriter().writeContentWithoutValue(javaField, builder, options);
+    
             if (++i != size) {
                 builder.append(',');
             } else {

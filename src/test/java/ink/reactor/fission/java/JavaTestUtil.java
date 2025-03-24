@@ -1,0 +1,70 @@
+package ink.reactor.fission.java;
+
+import ink.reactor.fission.JavaVisibility;
+import ink.reactor.fission.classes.JavaClass;
+import ink.reactor.fission.classes.JavaClassType;
+import ink.reactor.fission.commentary.MultiLineComentary;
+import ink.reactor.fission.commentary.SingleLineComentary;
+import ink.reactor.fission.field.JavaFieldCreator;
+import ink.reactor.fission.method.JavaMethod;
+import lombok.NonNull;
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
+public final class JavaTestUtil {
+
+    public static JavaClass registerDefaultData(final JavaClassType classType) {
+        final JavaClass javaClass = new JavaClass("ink.reactor.fission.test", "TestClass");
+
+        javaClass.addImports(
+            "ink.reactor.fission.JavaVisibility",
+            "lombok.NonNull"
+        );
+        javaClass.setComentary(MultiLineComentary.of(
+            """
+                Example class for test fission
+                Line2 :)"""
+        ));
+
+        javaClass.setClassType(classType);
+
+        final JavaMethod method = new JavaMethod("isPublic");
+        method
+            .addParameterFinal(JavaVisibility.class, "visibility")
+            .addAnnotation(NonNull.class);
+
+        method.setExceptionThrows("Exception");
+        method.setReturnObjectType("boolean");
+
+        method.addAnnotation(Deprecated.class)
+            .addEntry("since", "2025")
+            .addEntry("forRemoval", true);
+
+        javaClass.addFields(
+            JavaFieldCreator.constant("TEST_CONSTANT", 1),
+            JavaFieldCreator.primitive("instanceField", 1),
+            JavaFieldCreator.of(String.class, "stringField", "Example")
+        );
+
+        method.setCodeBlock(
+            """
+            if (visibility == JavaVisibility.PRIVATE) {
+                throw new Exception("This is the opposite of public >:("); 
+            }
+            return visibility == JavaVisibility.PUBLIC;"""
+        );
+
+        final JavaClass subClass = new JavaClass("SubClass");
+        subClass.addAnnotation(Deprecated.class);
+        subClass.setComentary(SingleLineComentary.of("Test"));
+
+        javaClass.addSubclass(subClass);
+
+        javaClass.addMethods(
+            method,
+            new JavaMethod("emptyMethod")
+        );
+
+        return javaClass;
+    }
+}

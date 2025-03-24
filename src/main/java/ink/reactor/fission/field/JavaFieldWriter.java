@@ -28,6 +28,12 @@ public class JavaFieldWriter {
     }
 
     public void writeContent(final JavaField field, final StringBuilder builder, final JavaFormatOptions options) {
+        writeContentWithoutValue(field, builder, options);
+        builder.append(" = ");
+        builder.append(field.getValue());
+    }
+
+    public void writeContentWithoutValue(final JavaField field, final StringBuilder builder, final JavaFormatOptions options) {
         if (field.hasAnnotations()) {
             for (final JavaAnnotation annotation : field.getAnnotations()) {
                 options.getAnnotationWriter().write(annotation, builder, options);
@@ -37,7 +43,5 @@ public class JavaFieldWriter {
         builder.append(field.getType());
         builder.append(' ');
         builder.append(field.getName());
-        builder.append(" = ");
-        builder.append(field.getValue());
     }
 }

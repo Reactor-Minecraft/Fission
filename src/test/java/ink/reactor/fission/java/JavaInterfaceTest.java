@@ -6,11 +6,11 @@ import org.junit.Test;
 import ink.reactor.fission.classes.JavaClass;
 import ink.reactor.fission.classes.JavaClassType;
 
-public class JavaClassTest {
+public class JavaInterfaceTest {
 
     @Test
     public void checkSimpleClass() {
-        final JavaClass javaClass = JavaTestUtil.registerDefaultData(JavaClassType.CLASS);
+        final JavaClass javaClass = JavaTestUtil.registerDefaultData(JavaClassType.INTERFACE);
         Assert.assertEquals(
             """
             /**
@@ -22,21 +22,18 @@ public class JavaClassTest {
             import ink.reactor.fission.JavaVisibility;
             import lombok.NonNull;
 
-            public class TestClass {
-                public static final int TEST_CONSTANT = 1;
-
-                private int instanceField = 1;
-                private String stringField = "Example";
+            public interface TestClass {
+                int TEST_CONSTANT = 1;
 
                 @Deprecated(since = "2025", forRemoval = true)
-                public boolean isPublic(final @NonNull JavaVisibility visibility) throws Exception {
+                default boolean isPublic(final @NonNull JavaVisibility visibility) throws Exception {
                     if (visibility == JavaVisibility.PRIVATE) {
                         throw new Exception("This is the opposite of public >:(");
                     }
                     return visibility == JavaVisibility.PUBLIC;
                 }
 
-                public void emptyMethod() {}
+                public void emptyMethod();
 
                 // Test
                 @Deprecated

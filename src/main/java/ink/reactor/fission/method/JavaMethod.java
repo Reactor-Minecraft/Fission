@@ -30,6 +30,7 @@ public class JavaMethod implements JavaFormateable, AnnotationHelper {
     // Header content
     private final String name;
     private Collection<JavaMethodParameter> parameters;
+    private String exceptionThrows;
 
     // Body content
     private String codeBlock;

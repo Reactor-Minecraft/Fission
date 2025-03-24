@@ -6,11 +6,12 @@ import org.junit.Test;
 import ink.reactor.fission.classes.JavaClass;
 import ink.reactor.fission.classes.JavaClassType;
 
-public class JavaClassTest {
+public class JavaAbstractClassTest {
 
     @Test
     public void checkSimpleClass() {
-        final JavaClass javaClass = JavaTestUtil.registerDefaultData(JavaClassType.CLASS);
+        final JavaClass javaClass = JavaTestUtil.registerDefaultData(JavaClassType.ABSTRACT_CLASS);
+
         Assert.assertEquals(
             """
             /**
@@ -22,7 +23,7 @@ public class JavaClassTest {
             import ink.reactor.fission.JavaVisibility;
             import lombok.NonNull;
 
-            public class TestClass {
+            public abstract class TestClass {
                 public static final int TEST_CONSTANT = 1;
 
                 private int instanceField = 1;
@@ -36,7 +37,7 @@ public class JavaClassTest {
                     return visibility == JavaVisibility.PUBLIC;
                 }
 
-                public void emptyMethod() {}
+                public abstract void emptyMethod();
 
                 // Test
                 @Deprecated
