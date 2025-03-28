@@ -3,6 +3,7 @@ package ink.reactor.fission.method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 import ink.reactor.fission.JavaVisibility;
 import ink.reactor.fission.annotation.AnnotationHelper;
@@ -134,4 +135,21 @@ public class JavaMethod implements JavaFormateable, AnnotationHelper {
         }
     }
 
+    @Override
+    public final boolean equals(final Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        return obj instanceof JavaMethod method
+            && method.isFinal == this.isFinal
+            && method.isStatic == this.isStatic
+            && method.visibility == this.visibility
+            && method.name.equals(this.name)
+            && Objects.equals(method.exceptionThrows, this.exceptionThrows)
+            && Objects.equals(method.returnObjectType, this.returnObjectType)
+            && Objects.equals(method.annotations, this.annotations)
+            && Objects.equals(method.codeBlock, this.codeBlock)
+            && Objects.equals(method.parameters, this.parameters)
+            && Objects.equals(method.comentary, this.comentary); 
+    }
 }
