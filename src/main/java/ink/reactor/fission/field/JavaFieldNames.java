@@ -11,8 +11,12 @@ public final class JavaFieldNames {
             return fieldName;
         }
 
-        final StringBuilder result = new StringBuilder();
         final int length = fieldName.length();
+        if (length == 0 || Character.isUpperCase(fieldName.charAt(0))) {
+            return fieldName;
+        }
+
+        final StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < length; i++) {
             final char currentChar = fieldName.charAt(i);

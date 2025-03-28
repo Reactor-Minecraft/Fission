@@ -4,5 +4,6 @@ public enum JavaClassType {
     INTERFACE,
     ABSTRACT_CLASS,
     CLASS,
+    ENUM,
     RECORD;
 }

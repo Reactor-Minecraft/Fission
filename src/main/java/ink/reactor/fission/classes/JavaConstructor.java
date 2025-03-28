@@ -3,6 +3,7 @@ package ink.reactor.fission.classes;
 import java.util.Collection;
 
 import ink.reactor.fission.JavaVisibility;
+import ink.reactor.fission.classes.enums.JavaEnum;
 import ink.reactor.fission.field.JavaField;
 import ink.reactor.fission.method.JavaMethod;
 import ink.reactor.fission.method.JavaMethodParameter;
@@ -16,6 +17,14 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public final class JavaConstructor {
 
+    public static void add(final JavaEnum javaEnum) {
+        add(javaEnum, JavaVisibility.PRIVATE);
+    }
+
+    public static void add(final JavaClass javaClass) {
+        add(javaClass, javaClass.getVisibility());
+    }
+
     public static void add(final JavaClass javaClass, final JavaVisibility visibility) {
         if (!supportConstructor(javaClass)) {
             return;
@@ -26,7 +35,7 @@ public final class JavaConstructor {
         }
     
         final JavaMethod constructor = new JavaMethod(javaClass.getClassName());
-        constructor.setVisibility(visibility);
+        constructor.setVisibility((javaClass instanceof JavaEnum) ? JavaVisibility.PRIVATE : visibility);
 
         final StringBuilder content = new StringBuilder();
         constructor.setReturnObjectType(null);
@@ -48,11 +57,7 @@ public final class JavaConstructor {
         javaClass.addMethods(constructor);
     }
 
-    public static void add(final JavaClass javaClass) {
-        add(javaClass, javaClass.getVisibility());
-    }
-
     public static boolean supportConstructor(JavaClass javaClass) {
-        return javaClass.getClassType() == JavaClassType.CLASS || javaClass.getClassType() == JavaClassType.ABSTRACT_CLASS;
+        return javaClass.getClassType() != JavaClassType.RECORD && javaClass.getClassType() != JavaClassType.INTERFACE;
     } 
 }

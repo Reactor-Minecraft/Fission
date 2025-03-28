@@ -22,7 +22,7 @@ public final class ArrayAppender {
         final int size = collection.size();
         int i = 0;
         while (iterator.hasNext()) {
-            builder.append(collection);
+            builder.append(iterator.next());
             if (++i != size) {
                 builder.append(',');
             }   

@@ -18,6 +18,12 @@ public final class JavaTestUtil {
 
     public static JavaClass registerDefaultData(final JavaClassType classType) {
         final JavaClass javaClass = new JavaClass("ink.reactor.fission.test", "TestClass");
+        javaClass.setClassType(classType);
+        registerDefaultData(javaClass);
+        return javaClass;
+    }
+
+    public static JavaClass registerDefaultData(final JavaClass javaClass) {
 
         javaClass.addImports(
             "ink.reactor.fission.JavaVisibility",
@@ -28,8 +34,6 @@ public final class JavaTestUtil {
                 Example class for test fission
                 Line2 :)"""
         ));
-
-        javaClass.setClassType(classType);
 
         final JavaMethod method = new JavaMethod("isPublic");
         method
@@ -44,9 +48,9 @@ public final class JavaTestUtil {
             .addEntry("forRemoval", true);
 
         javaClass.addFields(
-            JavaFields.toConstant(JavaFields.ofShort("testConstant", (short)1)),
-            JavaFields.ofInt("instanceField", 1),
-            JavaFields.of(String.class, "stringField", "Example")
+            JavaFields.DEFAULT.toConstant(JavaFields.DEFAULT.ofShort("testConstant", (short)1)),
+            JavaFields.DEFAULT.ofInt("instanceField", 1),
+            JavaFields.DEFAULT.of(String.class, "stringField", "Example")
         );
 
         method.setCodeBlock(

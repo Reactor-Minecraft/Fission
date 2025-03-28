@@ -37,7 +37,7 @@ public final class JavaGetterAndSetters {
         }
 
         for (final JavaField field : javaClass.getFields()) {
-            if (!field.isStatic()) {
+            if (!field.isStatic() && !field.isFinal()) {
                 javaClass.addMethods(createSetter(field), createGetter(field));
             }
         }
@@ -53,8 +53,12 @@ public final class JavaGetterAndSetters {
             return;
         }
         for (final JavaField field : javaClass.getFields()) {
-            if (!field.isStatic()) {
-                javaClass.addMethods(createSetter(field), createGetter(field));
+            if (field.isStatic()) {
+                continue;
+            }
+            javaClass.addMethods(createGetter(field));
+            if (!field.isFinal()) {
+                javaClass.addMethods(createSetter(field));
             }
         }
     }

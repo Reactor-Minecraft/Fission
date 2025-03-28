@@ -44,20 +44,20 @@ public class JavaAbstractClassTest {
                     this.stringField = stringField;
                 }
 
-                public void setInstanceField(final int instanceField) {
-                    this.instanceField = instanceField;
-                }
-
                 public int getInstanceField() {
                     return this.instanceField;
                 }
 
-                public void setStringField(final String stringField) {
-                    this.stringField = stringField;
+                public void setInstanceField(final int instanceField) {
+                    this.instanceField = instanceField;
                 }
 
                 public String getStringField() {
                     return this.stringField;
+                }
+
+                public void setStringField(final String stringField) {
+                    this.stringField = stringField;
                 }
 
                 // Test

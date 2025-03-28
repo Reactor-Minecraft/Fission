@@ -34,7 +34,8 @@ public class JavaClassWriter {
         return switch (classType) {
             case RECORD -> JavaRecordWriter.DEFAULT;
             case ABSTRACT_CLASS -> JavaAbstractClassWriter.DEFAULT;
-            case INTERFACE -> JavaInterfaceClassWriter.DEFAULT;
+            case INTERFACE -> JavaInterfaceWriter.DEFAULT;
+            case ENUM -> JavaEnumWriter.DEFAULT;
             default -> DEFAULT;
         };
     }
@@ -85,6 +86,12 @@ public class JavaClassWriter {
 
         builder.append(" {");
 
+        writeClassContent(javaClass, builder, options);
+
+        builder.append('}');
+    }
+
+    public void writeClassContent(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
         if (javaClass.hasFields()) {
             builder.append('\n');
             writeFields(javaClass, builder, options);
@@ -100,8 +107,6 @@ public class JavaClassWriter {
             writeSubClasses(javaClass, builder, options);
             builder.append('\n');
         }
-
-        builder.append('}');
     }
 
     public void writeClassStart(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {

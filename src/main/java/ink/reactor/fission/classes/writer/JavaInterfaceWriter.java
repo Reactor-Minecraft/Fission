@@ -6,9 +6,9 @@ import ink.reactor.fission.format.JavaFormatOptions;
 import ink.reactor.fission.method.JavaMethod;
 import ink.reactor.fission.util.StringAppender;
 
-public class JavaInterfaceClassWriter extends JavaClassWriter {
+public class JavaInterfaceWriter extends JavaClassWriter {
 
-    public static final JavaInterfaceClassWriter DEFAULT = new JavaInterfaceClassWriter();
+    public static final JavaInterfaceWriter DEFAULT = new JavaInterfaceWriter();
 
     @Override
     public String getIdentifier() {

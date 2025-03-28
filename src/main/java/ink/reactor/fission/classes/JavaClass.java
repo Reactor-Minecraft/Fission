@@ -2,6 +2,7 @@ package ink.reactor.fission.classes;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 import ink.reactor.fission.JavaVisibility;
@@ -76,10 +77,28 @@ public class JavaClass implements JavaFormateable, AnnotationHelper {
             return;
         }
         if (imports == null) {
-            imports = new ArrayList<>(javaImports.length);
+            imports = new HashSet<>(javaImports.length);
         }
         for (final String javaImport : javaImports) {
             this.imports.add(javaImport);
+        }
+    }
+
+    public void addImports(final Class<?>... javaImports) {
+        if (javaImports.length == 0) {
+            return;
+        }
+        if (imports == null) {
+            imports = new HashSet<>(javaImports.length);
+        }
+        for (final Class<?> javaImport : javaImports) {
+            String importPath = javaImport.getPackageName();
+            if (importPath.isEmpty()) {
+                importPath = javaImport.getClass().getSimpleName();
+            } else {
+                importPath = importPath + '.' + javaImport.getClass().getSimpleName();
+            }
+            this.imports.add(importPath);
         }
     }
 
@@ -107,7 +126,7 @@ public class JavaClass implements JavaFormateable, AnnotationHelper {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        JavaClassWriter.getWriterByClassType(classType).writeClass(this, builder, JavaFormatOptions.DEFAULT_OPTIONS);
+        JavaClassWriter.getWriterByClassType(getClassType()).writeClass(this, builder, JavaFormatOptions.DEFAULT_OPTIONS);
         return builder.toString();
     }
 
@@ -122,9 +141,9 @@ public class JavaClass implements JavaFormateable, AnnotationHelper {
             && this.visibility == javaClass.visibility
             && this.className.equals(javaClass.className)
             && Objects.equals(this.packageName, javaClass.packageName)
-            && this.fields.equals(javaClass.fields)
-            && this.methods.equals(javaClass.methods)
-            && this.subClasses.equals(javaClass.subClasses);
+            && Objects.equals(this.fields, javaClass.fields)
+            && Objects.equals(this.methods, javaClass.methods)
+            && Objects.equals(this.subClasses, javaClass.subClasses);
     }
 
     public boolean hasFields() {
