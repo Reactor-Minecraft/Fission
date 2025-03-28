@@ -1,5 +1,8 @@
 package ink.reactor.fission.util;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -11,6 +14,18 @@ public final class ArrayAppender {
             if (i != array.length - 1) {
                 builder.append(',');
             }
+        }
+    }
+
+    public static void append(final Collection<?> collection, final StringBuilder builder) {
+        final Iterator<?> iterator = collection.iterator();
+        final int size = collection.size();
+        int i = 0;
+        while (iterator.hasNext()) {
+            builder.append(collection);
+            if (++i != size) {
+                builder.append(',');
+            }   
         }
     }
 

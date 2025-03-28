@@ -29,8 +29,11 @@ public class JavaFieldWriter {
 
     public void writeContent(final JavaField field, final StringBuilder builder, final JavaFormatOptions options) {
         writeContentWithoutValue(field, builder, options);
-        builder.append(" = ");
-        builder.append(field.getValue());
+
+        if (field.getValue() != null) {
+            builder.append(" = ");
+            builder.append(field.getValue());   
+        }
     }
 
     public void writeContentWithoutValue(final JavaField field, final StringBuilder builder, final JavaFormatOptions options) {

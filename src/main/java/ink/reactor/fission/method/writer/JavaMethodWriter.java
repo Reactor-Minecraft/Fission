@@ -2,11 +2,11 @@ package ink.reactor.fission.method.writer;
 
 import ink.reactor.fission.annotation.JavaAnnotation;
 import ink.reactor.fission.format.JavaFormatOptions;
-import ink.reactor.fission.format.JavaFormatter;
 import ink.reactor.fission.method.JavaMethod;
 import ink.reactor.fission.method.JavaMethodParameter;
 import ink.reactor.fission.util.StringAppender;
 import ink.reactor.fission.util.StringSplittler;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -69,8 +69,10 @@ public class JavaMethodWriter {
     }
 
     public void writeReturnNameAndParameters(final JavaMethod method, final StringBuilder builder, final JavaFormatOptions options) {
-        builder.append((method.getReturnObjectType() == null) ? "void" : method.getReturnObjectType());
-        builder.append(' ');
+        if (method.getReturnObjectType() != null) {
+            builder.append(method.getReturnObjectType());
+            builder.append(' ');
+        }
         builder.append(method.getName());
         builder.append('(');
 
@@ -111,13 +113,6 @@ public class JavaMethodWriter {
                 options.getSpacesInNewLine() + codeExtraIndentation);
         } else {
             builder.append(method.getCodeBlock());
-        }
-
-        if (method.getReturnValue() != null) {
-            builder.append('\n');
-            StringAppender.appendWithIndentation(builder, "return ", options.getSpacesInNewLine());
-            JavaFormatter.formatObject(method.getReturnValue(), options, builder, null);
-            builder.append(';');
         }
     }
 }

@@ -1,7 +1,7 @@
 package ink.reactor.fission.commentary;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import ink.reactor.fission.util.StringSplittler;
 import lombok.Getter;
@@ -13,7 +13,7 @@ public class MultiLineComentary {
     private final Collection<String> lines;
 
     public static MultiLineComentary of(final String... lines) {
-        return new MultiLineComentary(List.of(lines));
+        return new MultiLineComentary(Arrays.asList(lines));
     }
 
     public static MultiLineComentary of(final String lines) {

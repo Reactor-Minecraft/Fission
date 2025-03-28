@@ -23,7 +23,7 @@ public class JavaInterfaceTest {
             import lombok.NonNull;
 
             public interface TestClass {
-                int TEST_CONSTANT = 1;
+                short TEST_CONSTANT = 1;
 
                 @Deprecated(since = "2025", forRemoval = true)
                 default boolean isPublic(final @NonNull JavaVisibility visibility) throws Exception {

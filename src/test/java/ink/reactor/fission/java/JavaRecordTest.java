@@ -26,7 +26,7 @@ public class JavaRecordTest {
                 int instanceField,
                 String stringField
             ) {
-                public static final int TEST_CONSTANT = 1;
+                public static final short TEST_CONSTANT = 1;
                 @Deprecated(since = "2025", forRemoval = true)
                 public boolean isPublic(final @NonNull JavaVisibility visibility) throws Exception {
                     if (visibility == JavaVisibility.PRIVATE) {

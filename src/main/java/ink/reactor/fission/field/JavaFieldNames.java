@@ -7,7 +7,7 @@ public final class JavaFieldNames {
 
     // Transform Local fields to static. Example: "testField" to "TEST_FIELD"
     public static String toFieldStaticName(final String fieldName) {
-        if (fieldName.indexOf('_') != 0) { // Is already a constant field
+        if (fieldName.indexOf('_') != -1) { // Is already a constant field
             return fieldName;
         }
 

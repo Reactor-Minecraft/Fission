@@ -24,7 +24,7 @@ public class JavaAbstractClassTest {
             import lombok.NonNull;
 
             public abstract class TestClass {
-                public static final int TEST_CONSTANT = 1;
+                public static final short TEST_CONSTANT = 1;
 
                 private int instanceField = 1;
                 private String stringField = "Example";
@@ -38,6 +38,27 @@ public class JavaAbstractClassTest {
                 }
 
                 public abstract void emptyMethod();
+
+                public TestClass(int instanceField, String stringField) {
+                    this.instanceField = instanceField;
+                    this.stringField = stringField;
+                }
+
+                public void setInstanceField(final int instanceField) {
+                    this.instanceField = instanceField;
+                }
+
+                public int getInstanceField() {
+                    return this.instanceField;
+                }
+
+                public void setStringField(final String stringField) {
+                    this.stringField = stringField;
+                }
+
+                public String getStringField() {
+                    return this.stringField;
+                }
 
                 // Test
                 @Deprecated

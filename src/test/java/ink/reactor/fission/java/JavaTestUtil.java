@@ -3,10 +3,13 @@ package ink.reactor.fission.java;
 import ink.reactor.fission.JavaVisibility;
 import ink.reactor.fission.classes.JavaClass;
 import ink.reactor.fission.classes.JavaClassType;
+import ink.reactor.fission.classes.JavaConstructor;
 import ink.reactor.fission.commentary.MultiLineComentary;
 import ink.reactor.fission.commentary.SingleLineComentary;
-import ink.reactor.fission.field.JavaFieldCreator;
+import ink.reactor.fission.field.JavaFields;
+import ink.reactor.fission.method.JavaGetterAndSetters;
 import ink.reactor.fission.method.JavaMethod;
+
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
@@ -41,9 +44,9 @@ public final class JavaTestUtil {
             .addEntry("forRemoval", true);
 
         javaClass.addFields(
-            JavaFieldCreator.constant("TEST_CONSTANT", 1),
-            JavaFieldCreator.primitive("instanceField", 1),
-            JavaFieldCreator.of(String.class, "stringField", "Example")
+            JavaFields.toConstant(JavaFields.ofShort("testConstant", (short)1)),
+            JavaFields.ofInt("instanceField", 1),
+            JavaFields.of(String.class, "stringField", "Example")
         );
 
         method.setCodeBlock(
@@ -64,6 +67,9 @@ public final class JavaTestUtil {
             method,
             new JavaMethod("emptyMethod")
         );
+
+        JavaConstructor.add(javaClass);
+        JavaGetterAndSetters.add(javaClass);
 
         return javaClass;
     }

@@ -28,6 +28,11 @@ public class JavaField implements JavaFormateable, AnnotationHelper {
     private String name;
     private String value;
 
+    public JavaField(String type, String name) {
+        this.type = type;
+        this.name = name;
+    }
+
     public JavaField(String type, String name, String value) {
         this.type = type;
         this.name = name;

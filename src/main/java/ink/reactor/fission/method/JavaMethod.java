@@ -3,7 +3,6 @@ package ink.reactor.fission.method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Objects;
 
 import ink.reactor.fission.JavaVisibility;
 import ink.reactor.fission.annotation.AnnotationHelper;
@@ -34,8 +33,7 @@ public class JavaMethod implements JavaFormateable, AnnotationHelper {
 
     // Body content
     private String codeBlock;
-    private String returnObjectType;
-    private Object returnValue;
+    private String returnObjectType = "void";
 
     public JavaMethod(String name) {
         this.name = name;
@@ -86,16 +84,8 @@ public class JavaMethod implements JavaFormateable, AnnotationHelper {
         return codeBlock != null && !codeBlock.isEmpty();
     }
 
-    public <T> JavaMethod setReturn(final Class<T> type, final T returnObject) {
-        returnObjectType = type.getSimpleName();
-        returnValue = returnObject;
-        return this;
-    }
-
-    public JavaMethod setReturn(final String type, final Object returnObject) {
-        returnObjectType = type;
-        returnValue = returnObject;
-        return this;
+    public boolean hasReturn() {
+        return returnObjectType != null && returnObjectType != "void";
     }
 
     public JavaMethod addParameters(final JavaMethodParameter... javaParameters) {
@@ -132,18 +122,16 @@ public class JavaMethod implements JavaFormateable, AnnotationHelper {
         return parameter;
     }
 
-    @Override
-    public final boolean equals(final Object obj) {
-        if (obj == this) {
-            return true;
+    public <T> void addParametersFinal(final Class<?> type, final String... names) {
+        for (final String name : names) {
+            addParameterFinal(type, name);
         }
-        return obj instanceof JavaMethod method
-            && method.isFinal == this.isFinal
-            && method.isStatic == this.isStatic
-            && method.visibility == this.visibility
-            && method.name.equals(this.name)
-            && Objects.equals(method.codeBlock, this.codeBlock)
-            && Objects.equals(method.parameters, parameters)
-            && Objects.equals(comentary, method.comentary); 
     }
+
+    public <T> void addParameters(final Class<?> type, final String... names) {
+        for (final String name : names) {
+            addParameter(type, name);
+        }
+    }
+
 }
