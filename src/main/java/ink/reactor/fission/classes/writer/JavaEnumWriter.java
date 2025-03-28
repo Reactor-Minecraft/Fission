@@ -6,7 +6,6 @@ import ink.reactor.fission.classes.enums.JavaEnum;
 import ink.reactor.fission.classes.enums.JavaEnumObject;
 import ink.reactor.fission.format.JavaFormatOptions;
 import ink.reactor.fission.format.JavaFormatter;
-import ink.reactor.fission.util.ArrayAppender;
 import ink.reactor.fission.util.StringAppender;
 import lombok.Getter;
 import lombok.Setter;

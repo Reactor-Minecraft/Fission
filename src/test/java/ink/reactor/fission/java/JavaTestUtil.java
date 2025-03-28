@@ -48,7 +48,7 @@ public final class JavaTestUtil {
             .addEntry("forRemoval", true);
 
         javaClass.addFields(
-            JavaFields.DEFAULT.toConstant(JavaFields.DEFAULT.ofShort("testConstant", (short)1)),
+            JavaFields.STATIC_CONSTANTS.ofShort("testConstant", (short)1),
             JavaFields.DEFAULT.ofInt("instanceField", 1),
             JavaFields.DEFAULT.of(String.class, "stringField", "Example")
         );

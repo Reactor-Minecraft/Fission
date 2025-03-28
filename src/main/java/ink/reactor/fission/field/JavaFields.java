@@ -15,42 +15,39 @@ public @Builder class JavaFields {
 
     public static final JavaFields DEFAULT = JavaFields.builder().build();
     public static final JavaFields FINAL = JavaFields.builder().makeFinals(true).build();
+    public static final JavaFields STATIC_CONSTANTS = JavaFields.builder()
+        .makeFinals(true)
+        .visibility(JavaVisibility.PUBLIC)
+        .statics(true)
+        .constantStaticNames(true).build();
 
     private @Builder.Default boolean makeFinals = false;
     private @Builder.Default JavaVisibility visibility = JavaVisibility.PRIVATE;
+    private @Builder.Default boolean statics = false;
+    private @Builder.Default boolean constantStaticNames = false;
 
     private JavaField applyOptions(final JavaField field) {
         field.setFinal(makeFinals);
         field.setVisibility(visibility);
+
+        if (statics) {
+            field.setStatic(true);
+        }
+        if (constantStaticNames) {
+            field.setName(JavaFieldNames.toFieldStaticName(field.getName()));
+        }
+
         return field;
     }
 
-    public JavaField toConstant(final JavaField javaField) {
-        javaField.setName(JavaFieldNames.toFieldStaticName(javaField.getName()));
-        javaField.setVisibility(JavaVisibility.PUBLIC);
-        javaField.setFinal(true);
-        javaField.setStatic(true);
-        return javaField;
-    }
-
-    public <T> JavaField toConstant(final Class<T> type, final String name, final T value) {
-        return toConstant(of(type, name, value));
-    }
-
-    public <T> JavaField ofFinal(final Class<T> type, final String name, final T value) {
-        final JavaField javaField = of(type, name, value);
-        javaField.setFinal(true);
-        return javaField;
-    }
-
     public <T> JavaField of(final Class<T> type, final String name, final T value) {
-        return new JavaField(type.getSimpleName(), name, JavaFormatter.format(Arrays.asList(value)));
+        return applyOptions(new JavaField(type.getSimpleName(), name, JavaFormatter.format(Arrays.asList(value))));
     }
 
     public <T> JavaField of(final Class<T> type, final String name, final T value, final JavaVisibility visibility) {
         final JavaField javaField = new JavaField(type.getSimpleName(), name, JavaFormatter.format(Arrays.asList(value)));
         javaField.setVisibility(visibility);
-        return javaField;
+        return applyOptions(javaField);
     }
 
     public JavaField ofInt(final String name, final int value) {
