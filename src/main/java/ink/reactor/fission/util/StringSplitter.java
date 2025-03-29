@@ -6,7 +6,7 @@ import java.util.List;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public final class StringSplittler {
+public final class StringSplitter {
 
     /**
      * Split a string by per delimiter character

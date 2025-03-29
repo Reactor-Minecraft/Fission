@@ -27,8 +27,8 @@ public class JavaAbstractClassWriter extends JavaClassWriter {
             if (method.hasCode()) {
                 options.getMethodWriter().writeMethod(method, methodBuilder, options);
             } else {
-                if (method.getComentary() != null) {
-                    options.getComentaryWriter().write(methodBuilder, method.getComentary());
+                if (method.getCommentary() != null) {
+                    options.getCommentaryWriter().write(methodBuilder, method.getCommentary());
                     methodBuilder.append('\n');
                 }
                 options.getMethodWriter().writeMethodAnnotations(method, methodBuilder, options);

@@ -19,12 +19,12 @@ public class JavaClassWriter {
 
     public static final JavaClassWriter DEFAULT = new JavaClassWriter();
 
-    private int newLinesBetwenImportsAndClass = 1;
-    private int newLinesBetwenPackage = 2;
+    private int newLinesBetweenImportsAndClass = 1;
+    private int newLinesBetweenPackage = 2;
     private int newLinesBetweenMethods = 2;
     private int newLinesBetweenFields = 1;
 
-    private int newLinesBetwenStaticAndInstaceFields = 2;
+    private int newLinesBetweenStaticAndInstanceFields = 2;
 
     public String getIdentifier() {
         return "class";
@@ -43,19 +43,19 @@ public class JavaClassWriter {
     public void writeClass(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
         writeImportAndPackage(javaClass, builder, options);
         if (javaClass.hasImports()) {
-            builder.repeat('\n', newLinesBetwenImportsAndClass);
+            builder.repeat('\n', newLinesBetweenImportsAndClass);
         }
         writeClassWithoutImportsAndPackage(javaClass, builder, options, false);
     }
 
     public void writeImportAndPackage(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
-        if (javaClass.hasComentary()) {
-            options.getComentaryWriter().write(builder, javaClass.getComentary());
+        if (javaClass.hasCommentary()) {
+            options.getCommentaryWriter().write(builder, javaClass.getCommentary());
             builder.append('\n');
         }
 
         builder.append("package ").append(javaClass.getPackageName()).append(';');
-        builder.repeat('\n', newLinesBetwenPackage);
+        builder.repeat('\n', newLinesBetweenPackage);
 
         writeImports(javaClass, builder);
     }
@@ -69,9 +69,9 @@ public class JavaClassWriter {
         }
     }
 
-    public void writeClassWithoutImportsAndPackage(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options, final boolean writeComentary) {
-        if (writeComentary && javaClass.getComentary() != null) {
-            options.getComentaryWriter().write(builder, javaClass.getComentary());
+    public void writeClassWithoutImportsAndPackage(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options, final boolean writeCommentary) {
+        if (writeCommentary && javaClass.hasCommentary()) {
+            options.getCommentaryWriter().write(builder, javaClass.getCommentary());
             builder.append('\n');
         }
 
@@ -138,7 +138,7 @@ public class JavaClassWriter {
 
         if (instanceFields != 0) {
             if (staticFields > 0) {
-                builder.repeat('\n', newLinesBetwenStaticAndInstaceFields); 
+                builder.repeat('\n', newLinesBetweenStaticAndInstanceFields);
             }
             writeFieldsPredicate(javaClass, builder, options, (field) -> !field.isStatic());
         }

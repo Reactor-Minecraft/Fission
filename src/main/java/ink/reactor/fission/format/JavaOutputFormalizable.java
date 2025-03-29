@@ -10,11 +10,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-public final class JavaOutputFormateable {
+public final class JavaOutputFormalizable {
     private Collection<?> output;
     private JavaFormatOptions options;
 
-    public JavaOutputFormateable() {
+    public JavaOutputFormalizable() {
         output = new ArrayDeque<>();
         options = JavaFormatOptions.DEFAULT_OPTIONS;
     }

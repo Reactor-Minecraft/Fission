@@ -5,7 +5,7 @@ import java.util.Map;
 
 import ink.reactor.fission.annotation.JavaAnnotationWriter;
 import ink.reactor.fission.classes.writer.JavaClassWriter;
-import ink.reactor.fission.commentary.JavaComentaryWriter;
+import ink.reactor.fission.commentary.JavaCommentaryWriter;
 import ink.reactor.fission.field.JavaFieldWriter;
 import ink.reactor.fission.format.objects.JavaPrimitiveFormat;
 import ink.reactor.fission.method.writer.JavaMethodWriter;
@@ -21,12 +21,12 @@ public class JavaFormatOptions {
 
     public static JavaFormatOptions withDefaultOptions() {
         final JavaFormatOptions formatOptions = new JavaFormatOptions();
-        formatOptions.formateableObjects = new HashMap<>();
-        JavaPrimitiveFormat.loadAll(formatOptions.formateableObjects);
+        formatOptions.formalizableObjects = new HashMap<>();
+        JavaPrimitiveFormat.loadAll(formatOptions.formalizableObjects);
         return formatOptions;
     }
 
-    private Map<Class<?>, JavaFormateable> formateableObjects;
+    private Map<Class<?>, JavaFormalizable> formalizableObjects;
 
     private boolean
         appendNullable = true,
@@ -47,13 +47,13 @@ public class JavaFormatOptions {
     private JavaMethodWriter methodWriter = JavaMethodWriter.DEFAULT;
     private JavaClassWriter classWriter = JavaClassWriter.DEFAULT;
     private JavaFieldWriter fieldWriter = JavaFieldWriter.DEFAULT;
-    private JavaComentaryWriter comentaryWriter = JavaComentaryWriter.DEFAULT;
+    private JavaCommentaryWriter commentaryWriter = JavaCommentaryWriter.DEFAULT;
     private JavaAnnotationWriter annotationWriter = JavaAnnotationWriter.DEFAULT;
 
-    public void addFormat(final Class<?> clazz, final JavaFormateable javaFormateable) {
-        if (formateableObjects == null) {
-            formateableObjects = new HashMap<>();
+    public void addFormat(final Class<?> clazz, final JavaFormalizable javaFormalizable) {
+        if (formalizableObjects == null) {
+            formalizableObjects = new HashMap<>();
         }
-        formateableObjects.put(clazz, javaFormateable);
+        formalizableObjects.put(clazz, javaFormalizable);
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ink.reactor.fission.format.JavaFormatOptions;
-import ink.reactor.fission.format.JavaFormateable;
+import ink.reactor.fission.format.JavaFormalizable;
 
 public final class JavaCollectionFormat {
 
@@ -16,7 +16,7 @@ public final class JavaCollectionFormat {
         options.addFormat(HashMap.class, singleGeneric("HashMap"));
     }
 
-    public static JavaFormateable singleGeneric(final String name) {
+    public static JavaFormalizable singleGeneric(final String name) {
         return (object, options, builder, values) -> {
             final String className = "new " + name + "<>";
             builder.append(className);

@@ -9,8 +9,8 @@ import ink.reactor.fission.JavaVisibility;
 import ink.reactor.fission.annotation.AnnotationHelper;
 import ink.reactor.fission.annotation.JavaAnnotation;
 import ink.reactor.fission.format.JavaFormatOptions;
-import ink.reactor.fission.format.JavaFormateable;
-import ink.reactor.fission.format.JavaOutputFormateable;
+import ink.reactor.fission.format.JavaFormalizable;
+import ink.reactor.fission.format.JavaOutputFormalizable;
 import ink.reactor.fission.method.writer.JavaMethodWriter;
 
 import lombok.Getter;
@@ -18,10 +18,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class JavaMethod implements JavaFormateable, AnnotationHelper {
+public class JavaMethod implements JavaFormalizable, AnnotationHelper {
 
     // Header
-    private Object comentary;
+    private Object commentary;
     private Collection<JavaAnnotation> annotations;
     private JavaVisibility visibility = JavaVisibility.PUBLIC;
     private boolean isStatic = false;
@@ -57,7 +57,7 @@ public class JavaMethod implements JavaFormateable, AnnotationHelper {
     }
 
     @Override
-    public void format(final Object object, final JavaFormatOptions options, final StringBuilder builder, final JavaOutputFormateable outputFormateable) {
+    public void format(final Object object, final JavaFormatOptions options, final StringBuilder builder, final JavaOutputFormalizable outputFormalizable) {
         writeMethod(builder, options);
     }
 
@@ -86,7 +86,7 @@ public class JavaMethod implements JavaFormateable, AnnotationHelper {
     }
 
     public boolean hasReturn() {
-        return returnObjectType != null && returnObjectType != "void";
+        return returnObjectType != null && !returnObjectType.equals("void");
     }
 
     public JavaMethod addParameters(final JavaMethodParameter... javaParameters) {
@@ -145,7 +145,7 @@ public class JavaMethod implements JavaFormateable, AnnotationHelper {
         javaMethod.annotations = this.annotations;
         javaMethod.codeBlock = this.codeBlock;
         javaMethod.parameters = this.parameters;
-        javaMethod.comentary = this.comentary;
+        javaMethod.commentary = this.commentary;
         return javaMethod;
     }
 
@@ -164,6 +164,6 @@ public class JavaMethod implements JavaFormateable, AnnotationHelper {
             && Objects.equals(method.annotations, this.annotations)
             && Objects.equals(method.codeBlock, this.codeBlock)
             && Objects.equals(method.parameters, this.parameters)
-            && Objects.equals(method.comentary, this.comentary); 
+            && Objects.equals(method.commentary, this.commentary);
     }
 }

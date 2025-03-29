@@ -66,8 +66,8 @@ public class JavaRecordWriter extends JavaClassWriter {
                 builder.append('\n');
             }
 
-            if (javaField.getComentary() != null) {
-                options.getComentaryWriter().writeWithIndentation(builder, javaField.getComentary(), options.getSpacesInNewLine());
+            if (javaField.getCommentary() != null) {
+                options.getCommentaryWriter().writeWithIndentation(builder, javaField.getCommentary(), options.getSpacesInNewLine());
                 builder.append('\n');
             }
 

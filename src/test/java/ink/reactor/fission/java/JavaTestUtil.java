@@ -4,8 +4,8 @@ import ink.reactor.fission.JavaVisibility;
 import ink.reactor.fission.classes.JavaClass;
 import ink.reactor.fission.classes.JavaClassType;
 import ink.reactor.fission.classes.JavaConstructor;
-import ink.reactor.fission.commentary.MultiLineComentary;
-import ink.reactor.fission.commentary.SingleLineComentary;
+import ink.reactor.fission.commentary.MultiLineCommentary;
+import ink.reactor.fission.commentary.SingleLineCommentary;
 import ink.reactor.fission.field.JavaFields;
 import ink.reactor.fission.method.JavaGetterAndSetters;
 import ink.reactor.fission.method.JavaMethod;
@@ -29,7 +29,7 @@ public final class JavaTestUtil {
             "ink.reactor.fission.JavaVisibility",
             "lombok.NonNull"
         );
-        javaClass.setComentary(MultiLineComentary.of(
+        javaClass.setCommentary(MultiLineCommentary.of(
             """
                 Example class for test fission
                 Line2 :)"""
@@ -63,7 +63,7 @@ public final class JavaTestUtil {
 
         final JavaClass subClass = new JavaClass("SubClass");
         subClass.addAnnotation(Deprecated.class);
-        subClass.setComentary(SingleLineComentary.of("Test"));
+        subClass.setCommentary(SingleLineCommentary.of("Test"));
 
         javaClass.addSubclass(subClass);
 

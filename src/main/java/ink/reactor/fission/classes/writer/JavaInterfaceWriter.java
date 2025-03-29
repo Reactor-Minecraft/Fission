@@ -29,8 +29,8 @@ public class JavaInterfaceWriter extends JavaClassWriter {
             if (i++ != 0) {
                 builder.repeat('\n', getNewLinesBetweenFields());
             }
-            if (field.getComentary() != null) {
-                options.getComentaryWriter().writeWithIndentation(builder, field.getComentary(), options.getSpacesInNewLine());
+            if (field.getCommentary() != null) {
+                options.getCommentaryWriter().writeWithIndentation(builder, field.getCommentary(), options.getSpacesInNewLine());
                 builder.append('\n');
             }
             builder.repeat(' ', options.getSpacesInNewLine());
@@ -53,8 +53,8 @@ public class JavaInterfaceWriter extends JavaClassWriter {
             }
 
             final StringBuilder methodBuilder = new StringBuilder();
-            if (method.getComentary() != null) {
-                options.getComentaryWriter().write(methodBuilder, method.getComentary());
+            if (method.getCommentary() != null) {
+                options.getCommentaryWriter().write(methodBuilder, method.getCommentary());
                 methodBuilder.append('\n');
             }
 

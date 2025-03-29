@@ -49,7 +49,7 @@ public final class StringAppender {
 
     public static void appendLinesWithIndentation(final StringBuilder builder, final String lines, final int indentation) {
         if (lines != null) {
-            appendLinesWithIndentation(builder, StringSplittler.split(lines, '\n'), indentation);
+            appendLinesWithIndentation(builder, StringSplitter.split(lines, '\n'), indentation);
         }
     }
 }

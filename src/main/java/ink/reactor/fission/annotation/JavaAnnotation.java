@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import ink.reactor.fission.format.JavaFormatOptions;
-import ink.reactor.fission.format.JavaFormateable;
-import ink.reactor.fission.format.JavaOutputFormateable;
+import ink.reactor.fission.format.JavaFormalizable;
+import ink.reactor.fission.format.JavaOutputFormalizable;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class JavaAnnotation implements JavaFormateable {
+public class JavaAnnotation implements JavaFormalizable {
 
     private String type;
     private Collection<JavaAnnotationEntry> entries;
@@ -33,18 +33,18 @@ public class JavaAnnotation implements JavaFormateable {
         return this;
     }
 
-    public JavaAnnotation addEntry(JavaAnnotationEntry... javaannotationEntries) {
+    public JavaAnnotation addEntry(JavaAnnotationEntry... javaAnnotationEntries) {
         if (this.entries == null) {
             this.entries = new ArrayList<>();
         }
-        for (final JavaAnnotationEntry entry : javaannotationEntries) {
+        for (final JavaAnnotationEntry entry : javaAnnotationEntries) {
             this.entries.add(entry);
         }
         return this;
     }
 
     @Override
-    public void format(Object object, JavaFormatOptions options, StringBuilder builder, JavaOutputFormateable outputFormateable) {
+    public void format(Object object, JavaFormatOptions options, StringBuilder builder, JavaOutputFormalizable outputFormalizable) {
         write(builder, options);
     }
 

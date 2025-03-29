@@ -54,7 +54,7 @@ public class JavaEnum extends JavaClass {
         javaEnum.setFields(this.getFields());
         javaEnum.setMethods(this.getMethods());
         javaEnum.setSubClasses(this.getSubClasses());
-        javaEnum.setComentary(this.getComentary());
+        javaEnum.setCommentary(this.getCommentary());
         javaEnum.setStatic(this.isStatic());
         javaEnum.enumObjects = this.enumObjects;
         return javaEnum;

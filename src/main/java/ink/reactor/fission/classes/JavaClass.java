@@ -11,8 +11,8 @@ import ink.reactor.fission.annotation.JavaAnnotation;
 import ink.reactor.fission.classes.writer.JavaClassWriter;
 import ink.reactor.fission.field.JavaField;
 import ink.reactor.fission.format.JavaFormatOptions;
-import ink.reactor.fission.format.JavaFormateable;
-import ink.reactor.fission.format.JavaOutputFormateable;
+import ink.reactor.fission.format.JavaFormalizable;
+import ink.reactor.fission.format.JavaOutputFormalizable;
 import ink.reactor.fission.method.JavaMethod;
 
 import lombok.Getter;
@@ -20,11 +20,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class JavaClass implements JavaFormateable, AnnotationHelper {
+public class JavaClass implements JavaFormalizable, AnnotationHelper {
 
     // Header
     private Collection<JavaAnnotation> annotations;
-    private Object comentary;
+    private Object commentary;
     private final String packageName;
     private JavaVisibility visibility = JavaVisibility.PUBLIC;
     private boolean isStatic = false;
@@ -115,7 +115,7 @@ public class JavaClass implements JavaFormateable, AnnotationHelper {
     }
 
     @Override
-    public void format(final Object object, final JavaFormatOptions options, final StringBuilder builder, final JavaOutputFormateable outputFormateable) {
+    public void format(final Object object, final JavaFormatOptions options, final StringBuilder builder, final JavaOutputFormalizable outputFormalizable) {
         write(builder, options);
     }
 
@@ -139,7 +139,7 @@ public class JavaClass implements JavaFormateable, AnnotationHelper {
         javaClass.methods = this.methods;
         javaClass.subClasses = this.subClasses;
         javaClass.isStatic = this.isStatic;
-        javaClass.comentary = this.comentary;
+        javaClass.commentary = this.commentary;
         return javaClass;
     }
 
@@ -155,7 +155,7 @@ public class JavaClass implements JavaFormateable, AnnotationHelper {
             && this.visibility == javaClass.visibility
             && this.className.equals(javaClass.className)
             && Objects.equals(this.packageName, javaClass.packageName)
-            && Objects.equals(this.comentary, javaClass.comentary)
+            && Objects.equals(this.commentary, javaClass.commentary)
             && Objects.equals(this.fields, javaClass.fields)
             && Objects.equals(this.methods, javaClass.methods)
             && Objects.equals(this.subClasses, javaClass.subClasses);
@@ -177,8 +177,8 @@ public class JavaClass implements JavaFormateable, AnnotationHelper {
         return imports != null && !imports.isEmpty();
     }
 
-    public boolean hasComentary() {
-        return comentary != null;
+    public boolean hasCommentary() {
+        return commentary != null;
     }
 
     public int getStaticFields() {

@@ -6,18 +6,18 @@ import ink.reactor.fission.JavaVisibility;
 import ink.reactor.fission.annotation.AnnotationHelper;
 import ink.reactor.fission.annotation.JavaAnnotation;
 import ink.reactor.fission.format.JavaFormatOptions;
-import ink.reactor.fission.format.JavaFormateable;
-import ink.reactor.fission.format.JavaOutputFormateable;
+import ink.reactor.fission.format.JavaFormalizable;
+import ink.reactor.fission.format.JavaOutputFormalizable;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class JavaField implements JavaFormateable, AnnotationHelper {
+public class JavaField implements JavaFormalizable, AnnotationHelper {
 
     // Header
-    private Object comentary;
+    private Object commentary;
     private Collection<JavaAnnotation> annotations;
     private JavaVisibility visibility = JavaVisibility.PRIVATE;
     private boolean isStatic = false;
@@ -40,7 +40,7 @@ public class JavaField implements JavaFormateable, AnnotationHelper {
     }
 
     @Override
-    public void format(final Object object, final JavaFormatOptions options, final StringBuilder builder, final JavaOutputFormateable outputFormateable) {
+    public void format(final Object object, final JavaFormatOptions options, final StringBuilder builder, final JavaOutputFormalizable outputFormalizable) {
         write(builder, options);
     }
 
@@ -65,7 +65,7 @@ public class JavaField implements JavaFormateable, AnnotationHelper {
         javaField.isFinal = this.isFinal;
         javaField.isStatic = this.isStatic;
         javaField.visibility = this.visibility;
-        javaField.comentary = this.comentary;
+        javaField.commentary = this.commentary;
         return javaField;
     }
 
@@ -80,6 +80,6 @@ public class JavaField implements JavaFormateable, AnnotationHelper {
             && javaField.visibility == this.visibility
             && javaField.type.equals(this.type)
             && javaField.name.equals(this.name)
-            && (this.comentary != null && this.comentary.equals(javaField.comentary)); 
+            && (this.commentary != null && this.commentary.equals(javaField.commentary));
     }
 }

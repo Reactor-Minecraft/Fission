@@ -2,41 +2,41 @@ package ink.reactor.fission.format.objects;
 
 import java.util.Map;
 
-import ink.reactor.fission.format.JavaFormateable;
+import ink.reactor.fission.format.JavaFormalizable;
 import ink.reactor.fission.util.ArrayAppender;
 
 public final class JavaPrimitiveFormat {
 
-    public static void loadAll(final Map<Class<?>, JavaFormateable> formateable) {
-        addStringFormat(formateable);
-        addArrayFormat(formateable);
-        addBooleanFormat(formateable);
-        addNumbersFormat(formateable);
+    public static void loadAll(final Map<Class<?>, JavaFormalizable> formalizableMap) {
+        addStringFormat(formalizableMap);
+        addArrayFormat(formalizableMap);
+        addBooleanFormat(formalizableMap);
+        addNumbersFormat(formalizableMap);
     }
 
-    public static void addBooleanFormat(final Map<Class<?>, JavaFormateable> formateable) {
-        formateable.put(Boolean.class, (object, options, builder, values) -> {
+    public static void addBooleanFormat(final Map<Class<?>, JavaFormalizable> formalizableMap) {
+        formalizableMap.put(Boolean.class, (object, options, builder, values) -> {
             if (object instanceof Boolean boolean1) {
                 builder.append(boolean1.booleanValue());
             } else {
-                builder.append((object instanceof Boolean boolean1) ? boolean1.booleanValue() : false);
+                builder.append(false);
             }
         });
     }
 
-    public static void addNumbersFormat(final Map<Class<?>, JavaFormateable> formateable) {
-        final JavaFormateable defaultFormateable = (object, options, builder, values) -> builder.append(object.toString());
-        formateable.put(Byte.class, defaultFormateable);
-        formateable.put(Short.class, defaultFormateable);
-        formateable.put(Character.class, defaultFormateable);
-        formateable.put(Integer.class, defaultFormateable);
-        formateable.put(Long.class, defaultFormateable);
-        formateable.put(Float.class, defaultFormateable);
-        formateable.put(Double.class, defaultFormateable);
+    public static void addNumbersFormat(final Map<Class<?>, JavaFormalizable> formalizableMap) {
+        final JavaFormalizable defaultFormalizable = (object, options, builder, values) -> builder.append(object.toString());
+        formalizableMap.put(Byte.class, defaultFormalizable);
+        formalizableMap.put(Short.class, defaultFormalizable);
+        formalizableMap.put(Character.class, defaultFormalizable);
+        formalizableMap.put(Integer.class, defaultFormalizable);
+        formalizableMap.put(Long.class, defaultFormalizable);
+        formalizableMap.put(Float.class, defaultFormalizable);
+        formalizableMap.put(Double.class, defaultFormalizable);
     }
 
-    public static void addStringFormat(final Map<Class<?>, JavaFormateable> formateable) {
-        formateable.put(String.class, (object, options, builder, values) -> {
+    public static void addStringFormat(final Map<Class<?>, JavaFormalizable> formalizableMap) {
+        formalizableMap.put(String.class, (object, options, builder, values) -> {
             if (options.isAddStringQuoteMarks()) {
                 builder.append('"');
                 builder.append(object.toString());
@@ -47,7 +47,7 @@ public final class JavaPrimitiveFormat {
         });
 
         // Multiline strings
-        formateable.put(String[].class, (object, options, builder, values) -> {
+        formalizableMap.put(String[].class, (object, options, builder, values) -> {
             builder.append('\n');
             builder.repeat('"', 3);
         
@@ -61,8 +61,8 @@ public final class JavaPrimitiveFormat {
         });
     }
 
-    public static void addArrayFormat(final Map<Class<?>, JavaFormateable> formateable) {
-        formateable.put(byte[].class, (object, options, builder, values) -> {
+    public static void addArrayFormat(final Map<Class<?>, JavaFormalizable> formalizableMap) {
+        formalizableMap.put(byte[].class, (object, options, builder, values) -> {
             if (options.isAddByteArrayPrefix()) {
                 builder.append("new byte[] {");
                 ArrayAppender.append((byte[])object, builder);
@@ -72,7 +72,7 @@ public final class JavaPrimitiveFormat {
             }
         });
 
-        formateable.put(short[].class, (object, options, builder, values) -> {
+        formalizableMap.put(short[].class, (object, options, builder, values) -> {
             if (options.isAddShortArrayPrefix()) {
                 builder.append("new short[] {");
                 ArrayAppender.append((short[])object, builder);
@@ -82,7 +82,7 @@ public final class JavaPrimitiveFormat {
             }
         });
 
-        formateable.put(char[].class, (object, options, builder, values) -> {
+        formalizableMap.put(char[].class, (object, options, builder, values) -> {
             if (options.isAddCharArrayPrefix()) {
                 builder.append("new char[] {");
                 ArrayAppender.appendCharsToInt((char[])object, builder);
@@ -92,7 +92,7 @@ public final class JavaPrimitiveFormat {
             }
         });
 
-        formateable.put(int[].class, (object, options, builder, values) -> {
+        formalizableMap.put(int[].class, (object, options, builder, values) -> {
             if (options.isAddIntArrayPrefix()) {
                 builder.append("new int[] {");
                 ArrayAppender.append((int[])object, builder);
@@ -102,7 +102,7 @@ public final class JavaPrimitiveFormat {
             }
         });
 
-        formateable.put(long[].class, (object, options, builder, values) -> {
+        formalizableMap.put(long[].class, (object, options, builder, values) -> {
             if (options.isAddLongArrayPrefix()) {
                 builder.append("new long[] {");
                 ArrayAppender.append((long[])object, builder);
@@ -112,7 +112,7 @@ public final class JavaPrimitiveFormat {
             }
         });
 
-        formateable.put(float[].class, (object, options, builder, values) -> {
+        formalizableMap.put(float[].class, (object, options, builder, values) -> {
             if (options.isAddFloatArrayPrefix()) {
                 builder.append("new float[] {");
                 ArrayAppender.append((float[])object, builder);
@@ -122,7 +122,7 @@ public final class JavaPrimitiveFormat {
             }
         });
 
-        formateable.put(double[].class, (object, options, builder, values) -> {
+        formalizableMap.put(double[].class, (object, options, builder, values) -> {
             if (options.isAddDoubleArrayPrefix()) {
                 builder.append("new double[] {");
                 ArrayAppender.append((double[])object, builder);

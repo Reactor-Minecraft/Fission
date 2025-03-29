@@ -19,13 +19,13 @@ import lombok.Setter;
  *     System.out.println(line2);
  * }
  * 
- * Recomended for methods with many parameters (Better than oracle style)
+ * Recommended for methods with many parameters (Better than oracle style)
  */
 @Getter
 @Setter
-public class JavaSplittedMethodWriter extends JavaMethodWriter {
+public class JavaSplitMethodWriter extends JavaMethodWriter {
 
-    public static final JavaSplittedMethodWriter DEFAULT = new JavaSplittedMethodWriter();
+    public static final JavaSplitMethodWriter DEFAULT = new JavaSplitMethodWriter();
 
     // How many parameters need to start splitting
     private int parametersToStartSplit = 3;

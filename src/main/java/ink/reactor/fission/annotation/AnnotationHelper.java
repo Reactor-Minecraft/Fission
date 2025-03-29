@@ -12,11 +12,11 @@ public interface AnnotationHelper {
         return getAnnotations() != null && !getAnnotations().isEmpty();
     }
 
-    default void addAnnotations(final JavaAnnotation... javaannotations) {
+    default void addAnnotations(final JavaAnnotation... javaAnnotations) {
         if (getAnnotations() == null) {
-            setAnnotations(new ArrayList<>(javaannotations.length));
+            setAnnotations(new ArrayList<>(javaAnnotations.length));
         }
-        for (final JavaAnnotation annotation : javaannotations) {
+        for (final JavaAnnotation annotation : javaAnnotations) {
             getAnnotations().add(annotation);
         }
     }

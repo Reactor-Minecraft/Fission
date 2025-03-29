@@ -5,13 +5,13 @@ import ink.reactor.fission.format.JavaFormatOptions;
 import ink.reactor.fission.method.JavaMethod;
 import ink.reactor.fission.method.JavaMethodParameter;
 import ink.reactor.fission.util.StringAppender;
-import ink.reactor.fission.util.StringSplittler;
+import ink.reactor.fission.util.StringSplitter;
 
 import lombok.Getter;
 import lombok.Setter;
 
 /*
- * Clasic method writer. Example:
+ * Classic method writer. Example:
  * 
  * public void testMethod(final @Nullable String line1, final @Nullable String line2) {
  *     System.out.println(line1);
@@ -42,8 +42,8 @@ public class JavaMethodWriter {
     }
 
     public void writeHeader(final JavaMethod method, final StringBuilder builder, final JavaFormatOptions options) {
-        if (method.getComentary() != null) {
-            options.getComentaryWriter().write(builder, method.getComentary());
+        if (method.getCommentary() != null) {
+            options.getCommentaryWriter().write(builder, method.getCommentary());
             builder.append('\n');
         }
     
@@ -109,7 +109,7 @@ public class JavaMethodWriter {
         if (codeBlockIndentation) {
             StringAppender.appendLinesWithIndentation(
                 builder,
-                StringSplittler.split(method.getCodeBlock(), '\n'),
+                StringSplitter.split(method.getCodeBlock(), '\n'),
                 options.getSpacesInNewLine() + codeExtraIndentation);
         } else {
             builder.append(method.getCodeBlock());

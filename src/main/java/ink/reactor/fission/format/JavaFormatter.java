@@ -12,8 +12,8 @@ public final class JavaFormatter {
     }
 
     public static String format(final Collection<?> values, JavaFormatOptions options) {
-        if (options.getFormateableObjects() == null) {
-            options.setFormateableObjects(JavaFormatOptions.DEFAULT_OPTIONS.getFormateableObjects());
+        if (options.getFormalizableObjects() == null) {
+            options.setFormalizableObjects(JavaFormatOptions.DEFAULT_OPTIONS.getFormalizableObjects());
         }
 
         final StringBuilder builder = new StringBuilder();
@@ -21,7 +21,7 @@ public final class JavaFormatter {
         int i = 0;
         final int size = values.size();
 
-        JavaOutputFormateable javaOutputFormateable = new JavaOutputFormateable();
+        JavaOutputFormalizable javaOutputFormalizable = new JavaOutputFormalizable();
 
         for (final Object object : values) {
 
@@ -37,11 +37,11 @@ public final class JavaFormatter {
                 builder.repeat(' ', options.getSpacesInNewLine());
             }
 
-            final JavaFormateable formateable = formatObject(object, options, builder, javaOutputFormateable);
+            final JavaFormalizable formateable = formatObject(object, options, builder, javaOutputFormalizable);
 
-            if (!javaOutputFormateable.getOutput().isEmpty()) {
-                builder.append(format(javaOutputFormateable.getOutput(), javaOutputFormateable.getOptions()));
-                javaOutputFormateable = new JavaOutputFormateable();
+            if (!javaOutputFormalizable.getOutput().isEmpty()) {
+                builder.append(format(javaOutputFormalizable.getOutput(), javaOutputFormalizable.getOptions()));
+                javaOutputFormalizable = new JavaOutputFormalizable();
             }
  
             if (++i != size && formateable != null) {
@@ -52,25 +52,25 @@ public final class JavaFormatter {
         return builder.toString();
     }
 
-    public static JavaFormateable formatObject(final Object object, final JavaFormatOptions options, final StringBuilder builder, final JavaOutputFormateable outputFormateable) {
+    public static JavaFormalizable formatObject(final Object object, final JavaFormatOptions options, final StringBuilder builder, final JavaOutputFormalizable outputFormalizable) {
         if (object == null) {
             builder.append("null");
             return null;
         }
 
-        if (object instanceof JavaFormateable javaFormateable) {
-            javaFormateable.format(object, options, builder, outputFormateable);
-            return javaFormateable;
+        if (object instanceof JavaFormalizable javaFormalizable) {
+            javaFormalizable.format(object, options, builder, outputFormalizable);
+            return javaFormalizable;
         }
 
-        final JavaFormateable formateable = options.getFormateableObjects().get(object.getClass());
+        final JavaFormalizable formalizable = options.getFormalizableObjects().get(object.getClass());
 
-        if (formateable != null) {
-            formateable.format(object, options, builder, outputFormateable);
-            return formateable;
+        if (formalizable != null) {
+            formalizable.format(object, options, builder, outputFormalizable);
+            return formalizable;
         }
 
-        // If there no java format available for this object, transform to string
+        // If there is no java format available for this object, transform to string
         builder.append('"');
         builder.append(object.toString());
         builder.append('"');

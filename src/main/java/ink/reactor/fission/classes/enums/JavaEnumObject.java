@@ -9,8 +9,8 @@ import ink.reactor.fission.annotation.JavaAnnotation;
 import ink.reactor.fission.classes.JavaClass;
 import ink.reactor.fission.classes.writer.JavaEnumWriter;
 import ink.reactor.fission.format.JavaFormatOptions;
-import ink.reactor.fission.format.JavaFormateable;
-import ink.reactor.fission.format.JavaOutputFormateable;
+import ink.reactor.fission.format.JavaFormalizable;
+import ink.reactor.fission.format.JavaOutputFormalizable;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +19,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class JavaEnumObject implements JavaFormateable, AnnotationHelper {
+public class JavaEnumObject implements JavaFormalizable, AnnotationHelper {
 
     // Header
     private Collection<JavaAnnotation> annotations;
-    private Object comentary;
+    private Object commentary;
 
     // Content
     private final String name;
@@ -31,7 +31,7 @@ public class JavaEnumObject implements JavaFormateable, AnnotationHelper {
     private JavaClass classInside;
 
     @Override
-    public void format(final Object object, final JavaFormatOptions options, final StringBuilder builder, final JavaOutputFormateable outputFormateable) {
+    public void format(final Object object, final JavaFormatOptions options, final StringBuilder builder, final JavaOutputFormalizable outputFormalizable) {
         write(options, builder);
     }
 

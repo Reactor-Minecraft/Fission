@@ -9,8 +9,8 @@ public class JavaFieldWriter {
     public static final JavaFieldWriter DEFAULT = new JavaFieldWriter();
 
     public void write(final JavaField field, final StringBuilder builder, final JavaFormatOptions options) {
-        if (field.getComentary() != null) {
-            options.getComentaryWriter().write(builder, field.getComentary());
+        if (field.getCommentary() != null) {
+            options.getCommentaryWriter().write(builder, field.getCommentary());
             builder.append('\n');
         }
 
