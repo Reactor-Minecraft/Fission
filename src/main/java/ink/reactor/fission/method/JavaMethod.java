@@ -38,21 +38,21 @@ public class JavaMethod implements JavaFormalizable, AnnotationHelper {
     private String codeBlock;
     private String returnObjectType = "void";
 
-    public JavaMethod(@NotNull String name) {
+    public JavaMethod(@NonNull String name) {
         this.name = name;
     }
 
-    public JavaMethod(@NotNull String name, @NotNull String codeBlock) {
+    public JavaMethod(@NonNull String name, String codeBlock) {
         this.name = name;
         this.codeBlock = codeBlock;
     }
 
-    public JavaMethod(@NotNull String name, @NotNull JavaMethodParameter... parameters) {
+    public JavaMethod(@NonNull String name, JavaMethodParameter... parameters) {
         this.name = name;
         this.parameters = Arrays.asList(parameters);
     }
 
-    public JavaMethod(@NotNull String name, @NotNull String codeBlock, @NotNull JavaMethodParameter... parameters) {
+    public JavaMethod(@NonNull String name, String codeBlock, JavaMethodParameter... parameters) {
         this.name = name;
         this.codeBlock = codeBlock;
         this.parameters = Arrays.asList(parameters);
