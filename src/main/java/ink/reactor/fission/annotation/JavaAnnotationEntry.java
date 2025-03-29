@@ -10,4 +10,8 @@ import lombok.Setter;
 public class JavaAnnotationEntry {
     private final String key;
     private Object value;
+
+    public JavaAnnotationEntry copy() {
+        return new JavaAnnotationEntry(key, value);
+    }
 }

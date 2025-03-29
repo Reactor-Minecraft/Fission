@@ -60,6 +60,15 @@ public class JavaField implements JavaFormateable, AnnotationHelper {
         return '\n';
     }
 
+    public JavaField copy() {
+        final JavaField javaField = new JavaField(type, name);
+        javaField.isFinal = this.isFinal;
+        javaField.isStatic = this.isStatic;
+        javaField.visibility = this.visibility;
+        javaField.comentary = this.comentary;
+        return javaField;
+    }
+
     @Override
     public final boolean equals(final Object obj) {
         if (obj == this) {

@@ -17,24 +17,28 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public final class JavaConstructor {
 
-    public static void add(final JavaEnum javaEnum) {
-        add(javaEnum, JavaVisibility.PRIVATE);
+    public static JavaMethod add(final JavaEnum javaEnum) {
+        return add(javaEnum, JavaVisibility.PRIVATE);
     }
 
-    public static void add(final JavaClass javaClass) {
-        add(javaClass, javaClass.getVisibility());
+    public static JavaMethod add(final JavaClass javaClass) {
+        return add(javaClass, javaClass.getVisibility());
     }
 
-    public static void add(final JavaClass javaClass, final JavaVisibility visibility) {
+    public static JavaMethod add(final JavaClass javaClass, final JavaVisibility visibility) {
+        return add(javaClass, javaClass.getClassName(), visibility);
+    }
+
+    public static JavaMethod add(final JavaClass javaClass, final String name, final JavaVisibility visibility) {
         if (!supportConstructor(javaClass)) {
-            return;
+            return null;
         }
         final int instanceFields = javaClass.getInstanceFields();
         if (instanceFields == 0) {
-            return;
+            return null;
         }
     
-        final JavaMethod constructor = new JavaMethod(javaClass.getClassName());
+        final JavaMethod constructor = new JavaMethod(name);
         constructor.setVisibility((javaClass instanceof JavaEnum) ? JavaVisibility.PRIVATE : visibility);
 
         final StringBuilder content = new StringBuilder();
@@ -55,6 +59,7 @@ public final class JavaConstructor {
         }
         constructor.setCodeBlock(content.toString());
         javaClass.addMethods(constructor);
+        return constructor;
     }
 
     public static boolean supportConstructor(JavaClass javaClass) {

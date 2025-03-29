@@ -130,6 +130,19 @@ public class JavaClass implements JavaFormateable, AnnotationHelper {
         return builder.toString();
     }
 
+    public JavaClass copy() {
+        final JavaClass javaClass = new JavaClass(packageName, className);
+        javaClass.isFinal = this.isFinal;
+        javaClass.classType = this.classType;
+        javaClass.visibility = this.visibility;
+        javaClass.fields = this.fields;
+        javaClass.methods = this.methods;
+        javaClass.subClasses = this.subClasses;
+        javaClass.isStatic = this.isStatic;
+        javaClass.comentary = this.comentary;
+        return javaClass;
+    }
+
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -137,10 +150,12 @@ public class JavaClass implements JavaFormateable, AnnotationHelper {
         }
         return (obj instanceof JavaClass javaClass)
             && this.isFinal == javaClass.isFinal
+            && this.isStatic == javaClass.isStatic
             && this.classType == javaClass.classType
             && this.visibility == javaClass.visibility
             && this.className.equals(javaClass.className)
             && Objects.equals(this.packageName, javaClass.packageName)
+            && Objects.equals(this.comentary, javaClass.comentary)
             && Objects.equals(this.fields, javaClass.fields)
             && Objects.equals(this.methods, javaClass.methods)
             && Objects.equals(this.subClasses, javaClass.subClasses);

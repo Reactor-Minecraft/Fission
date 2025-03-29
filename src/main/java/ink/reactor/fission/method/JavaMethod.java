@@ -135,6 +135,20 @@ public class JavaMethod implements JavaFormateable, AnnotationHelper {
         }
     }
 
+    public JavaMethod copy() {
+        final JavaMethod javaMethod = new JavaMethod(name);
+        javaMethod.isFinal = this.isFinal;
+        javaMethod.isStatic = this.isStatic;
+        javaMethod.visibility = this.visibility;
+        javaMethod.exceptionThrows = this.exceptionThrows;
+        javaMethod.returnObjectType = this.returnObjectType;
+        javaMethod.annotations = this.annotations;
+        javaMethod.codeBlock = this.codeBlock;
+        javaMethod.parameters = this.parameters;
+        javaMethod.comentary = this.comentary;
+        return javaMethod;
+    }
+
     @Override
     public final boolean equals(final Object obj) {
         if (obj == this) {

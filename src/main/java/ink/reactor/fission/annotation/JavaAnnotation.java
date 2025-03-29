@@ -52,6 +52,12 @@ public class JavaAnnotation implements JavaFormateable {
         options.getAnnotationWriter().write(this, builder, options);
     }
 
+    public JavaAnnotation copy() {
+        final JavaAnnotation annotation = new JavaAnnotation(type);
+        annotation.entries = this.entries;
+        return annotation;
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

@@ -63,6 +63,13 @@ public class JavaMethodParameter implements AnnotationHelper {
         return builder.toString();
     }
 
+    public JavaMethodParameter copy() {
+        final JavaMethodParameter javaMethodParameter = new JavaMethodParameter(type, name);
+        javaMethodParameter.annotations = this.annotations;
+        javaMethodParameter.isFinal = this.isFinal;
+        return javaMethodParameter;
+    }
+
     @Override
     public boolean equals(final Object obj) {
         if (obj == this) {

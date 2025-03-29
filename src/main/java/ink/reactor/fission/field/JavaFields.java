@@ -26,7 +26,11 @@ public @Builder class JavaFields {
     private @Builder.Default boolean statics = false;
     private @Builder.Default boolean constantStaticNames = false;
 
-    private JavaField applyOptions(final JavaField field) {
+    public JavaFields copy() {
+        return new JavaFields(makeFinals, visibility, statics, constantStaticNames);
+    }
+
+    public JavaField applyOptions(final JavaField field) {
         field.setFinal(makeFinals);
         field.setVisibility(visibility);
 
@@ -46,8 +50,13 @@ public @Builder class JavaFields {
 
     public <T> JavaField of(final Class<T> type, final String name, final T value, final JavaVisibility visibility) {
         final JavaField javaField = new JavaField(type.getSimpleName(), name, JavaFormatter.format(Arrays.asList(value)));
+        applyOptions(javaField);
         javaField.setVisibility(visibility);
-        return applyOptions(javaField);
+        return javaField;
+    }
+
+    public JavaField of(final String type, final String name, final String value) {
+        return applyOptions(new JavaField(type, name, JavaFormatter.format(Arrays.asList(value))));
     }
 
     public JavaField ofInt(final String name, final int value) {

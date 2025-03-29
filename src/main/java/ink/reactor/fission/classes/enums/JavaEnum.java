@@ -48,6 +48,19 @@ public class JavaEnum extends JavaClass {
     }
 
     @Override
+    public JavaClass copy() {
+        final JavaEnum javaEnum = new JavaEnum(getClassName());
+        javaEnum.setVisibility(this.getVisibility());
+        javaEnum.setFields(this.getFields());
+        javaEnum.setMethods(this.getMethods());
+        javaEnum.setSubClasses(this.getSubClasses());
+        javaEnum.setComentary(this.getComentary());
+        javaEnum.setStatic(this.isStatic());
+        javaEnum.enumObjects = this.enumObjects;
+        return javaEnum;
+    }
+
+    @Override
     public JavaClassType getClassType() {
         return JavaClassType.ENUM;
     }
