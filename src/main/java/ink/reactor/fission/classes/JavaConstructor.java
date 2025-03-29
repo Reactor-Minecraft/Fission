@@ -10,26 +10,29 @@ import ink.reactor.fission.method.JavaMethodParameter;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 @Setter
-@UtilityClass
 public final class JavaConstructor {
 
-    public static JavaMethod add(final JavaEnum javaEnum) {
+    public static final JavaConstructor DEFAULT = new JavaConstructor();
+
+    private String prefixField = "this.";
+
+    public JavaMethod add(final @NotNull JavaEnum javaEnum) {
         return add(javaEnum, JavaVisibility.PRIVATE);
     }
 
-    public static JavaMethod add(final JavaClass javaClass) {
+    public JavaMethod add(final @NotNull JavaClass javaClass) {
         return add(javaClass, javaClass.getVisibility());
     }
 
-    public static JavaMethod add(final JavaClass javaClass, final JavaVisibility visibility) {
+    public JavaMethod add(final @NotNull JavaClass javaClass, final @NotNull JavaVisibility visibility) {
         return add(javaClass, javaClass.getClassName(), visibility);
     }
 
-    public static JavaMethod add(final JavaClass javaClass, final String name, final JavaVisibility visibility) {
+    public JavaMethod add(final @NotNull JavaClass javaClass, final @NotNull String name, final @NotNull JavaVisibility visibility) {
         if (!supportConstructor(javaClass)) {
             return null;
         }
@@ -52,7 +55,10 @@ public final class JavaConstructor {
             }
 
             constructor.addParameters(new JavaMethodParameter(field.getType(), field.getName()));
-            content.append("this.").append(field.getName()).append(" = ").append(field.getName()).append(';');
+            if (prefixField != null) {
+                content.append(prefixField);
+            }
+            content.append(field.getName()).append(" = ").append(field.getName()).append(';');
             if (++i != instanceFields) {
                 content.append('\n');
             }
@@ -62,7 +68,7 @@ public final class JavaConstructor {
         return constructor;
     }
 
-    public static boolean supportConstructor(JavaClass javaClass) {
+    public static boolean supportConstructor(@NotNull JavaClass javaClass) {
         return javaClass.getClassType() != JavaClassType.RECORD && javaClass.getClassType() != JavaClassType.INTERFACE;
     } 
 }

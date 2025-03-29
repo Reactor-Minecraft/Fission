@@ -8,6 +8,7 @@ import ink.reactor.fission.format.JavaFormatter;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 @Setter
 @Getter
@@ -30,7 +31,7 @@ public @Builder class JavaFields {
         return new JavaFields(makeFinals, visibility, statics, constantStaticNames);
     }
 
-    public JavaField applyOptions(final JavaField field) {
+    public JavaField applyOptions(final @NotNull JavaField field) {
         field.setFinal(makeFinals);
         field.setVisibility(visibility);
 

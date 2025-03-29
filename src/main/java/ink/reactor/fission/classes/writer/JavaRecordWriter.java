@@ -6,6 +6,7 @@ import ink.reactor.fission.format.JavaFormatOptions;
 import ink.reactor.fission.util.StringAppender;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 @Setter
@@ -19,7 +20,11 @@ public class JavaRecordWriter extends JavaClassWriter {
     }
 
     @Override
-    public void writeFields(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeFields(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         final int staticFields = javaClass.getStaticFields();
 
         if (staticFields > 0) {
@@ -28,7 +33,11 @@ public class JavaRecordWriter extends JavaClassWriter {
     }
 
     @Override
-    public void writeClassStart(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeClassStart(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         StringAppender.appendVisibility(builder, javaClass.getVisibility());
 
         if (javaClass.isStatic()) {
@@ -49,7 +58,11 @@ public class JavaRecordWriter extends JavaClassWriter {
         builder.append(')');
     }
 
-    public void writeRecordFields(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeRecordFields(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (javaClass.getFields() == null) {
             return;
         }

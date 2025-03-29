@@ -3,12 +3,17 @@ package ink.reactor.fission.field;
 import ink.reactor.fission.annotation.JavaAnnotation;
 import ink.reactor.fission.format.JavaFormatOptions;
 import ink.reactor.fission.util.StringAppender;
+import org.jetbrains.annotations.NotNull;
 
 public class JavaFieldWriter {
 
     public static final JavaFieldWriter DEFAULT = new JavaFieldWriter();
 
-    public void write(final JavaField field, final StringBuilder builder, final JavaFormatOptions options) {
+    public void write(
+            final @NotNull JavaField field,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (field.getCommentary() != null) {
             options.getCommentaryWriter().write(builder, field.getCommentary());
             builder.append('\n');
@@ -27,7 +32,11 @@ public class JavaFieldWriter {
         builder.append(';');
     }
 
-    public void writeContent(final JavaField field, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeContent(
+            final @NotNull JavaField field,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         writeContentWithoutValue(field, builder, options);
 
         if (field.getValue() != null) {
@@ -36,7 +45,11 @@ public class JavaFieldWriter {
         }
     }
 
-    public void writeContentWithoutValue(final JavaField field, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeContentWithoutValue(
+            final @NotNull JavaField field,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (field.hasAnnotations()) {
             for (final JavaAnnotation annotation : field.getAnnotations()) {
                 options.getAnnotationWriter().write(annotation, builder, options);

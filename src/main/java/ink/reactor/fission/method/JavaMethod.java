@@ -14,7 +14,9 @@ import ink.reactor.fission.format.JavaOutputFormalizable;
 import ink.reactor.fission.method.writer.JavaMethodWriter;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 @Setter
@@ -23,12 +25,12 @@ public class JavaMethod implements JavaFormalizable, AnnotationHelper {
     // Header
     private Object commentary;
     private Collection<JavaAnnotation> annotations;
-    private JavaVisibility visibility = JavaVisibility.PUBLIC;
+    private @NonNull JavaVisibility visibility = JavaVisibility.PUBLIC;
     private boolean isStatic = false;
     private boolean isFinal = false;
 
     // Header content
-    private final String name;
+    private @NonNull String name;
     private Collection<JavaMethodParameter> parameters;
     private String exceptionThrows;
 
@@ -36,21 +38,21 @@ public class JavaMethod implements JavaFormalizable, AnnotationHelper {
     private String codeBlock;
     private String returnObjectType = "void";
 
-    public JavaMethod(String name) {
+    public JavaMethod(@NotNull String name) {
         this.name = name;
     }
 
-    public JavaMethod(String name, String codeBlock) {
+    public JavaMethod(@NotNull String name, @NotNull String codeBlock) {
         this.name = name;
         this.codeBlock = codeBlock;
     }
 
-    public JavaMethod(String name, JavaMethodParameter... parameters) {
+    public JavaMethod(@NotNull String name, @NotNull JavaMethodParameter... parameters) {
         this.name = name;
         this.parameters = Arrays.asList(parameters);
     }
 
-    public JavaMethod(String name, String codeBlock, JavaMethodParameter... parameters) {
+    public JavaMethod(@NotNull String name, @NotNull String codeBlock, @NotNull JavaMethodParameter... parameters) {
         this.name = name;
         this.codeBlock = codeBlock;
         this.parameters = Arrays.asList(parameters);
@@ -61,11 +63,11 @@ public class JavaMethod implements JavaFormalizable, AnnotationHelper {
         writeMethod(builder, options);
     }
 
-    public void writeMethod(final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeMethod(final @NotNull StringBuilder builder, final @NotNull JavaFormatOptions options) {
         writeMethod(options.getMethodWriter(), builder, options);
     }
 
-    public void writeMethod(final JavaMethodWriter writer, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeMethod(final @NotNull JavaMethodWriter writer, final @NotNull StringBuilder builder, final @NotNull JavaFormatOptions options) {
         writer.writeMethod(this, builder, options);
     }
 
@@ -89,7 +91,7 @@ public class JavaMethod implements JavaFormalizable, AnnotationHelper {
         return returnObjectType != null && !returnObjectType.equals("void");
     }
 
-    public JavaMethod addParameters(final JavaMethodParameter... javaParameters) {
+    public JavaMethod addParameters(final @NonNull JavaMethodParameter... javaParameters) {
         if (parameters == null) {
             parameters = new ArrayList<>();
         }
@@ -99,37 +101,37 @@ public class JavaMethod implements JavaFormalizable, AnnotationHelper {
         return this;
     }
 
-    public JavaMethodParameter addParameter(final Class<?> type, final String name) {
+    public JavaMethodParameter addParameter(final @NotNull Class<?> type, final @NotNull String name) {
         final JavaMethodParameter parameter = new JavaMethodParameter(type, name);
         addParameters(parameter);
         return parameter;
     }
 
-    public JavaMethodParameter addParameter(final String type, final String name) {
+    public JavaMethodParameter addParameter(final @NotNull String type, final @NotNull String name) {
         final JavaMethodParameter parameter = new JavaMethodParameter(type, name);
         addParameters(parameter);
         return parameter;
     }
 
-    public JavaMethodParameter addParameterFinal(final Class<?> type, final String name) {
+    public JavaMethodParameter addParameterFinal(final @NotNull Class<?> type, final @NotNull String name) {
         final JavaMethodParameter parameter = new JavaMethodParameter(type, name, true);
         addParameters(parameter);
         return parameter;
     }
 
-    public JavaMethodParameter addParameterFinal(final String type, final String name) {
+    public JavaMethodParameter addParameterFinal(final @NotNull String type, final @NotNull String name) {
         final JavaMethodParameter parameter = new JavaMethodParameter(type, name, true);
         addParameters(parameter);
         return parameter;
     }
 
-    public <T> void addParametersFinal(final Class<?> type, final String... names) {
+    public <T> void addParametersFinal(final @NonNull Class<?> type, final @NonNull String... names) {
         for (final String name : names) {
             addParameterFinal(type, name);
         }
     }
 
-    public <T> void addParameters(final Class<?> type, final String... names) {
+    public <T> void addParameters(final @NonNull Class<?> type, final @NonNull String... names) {
         for (final String name : names) {
             addParameter(type, name);
         }

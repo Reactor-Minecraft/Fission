@@ -1,12 +1,13 @@
 package ink.reactor.fission.field;
 
 import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.NotNull;
 
 @UtilityClass
 public final class JavaFieldNames {
 
     // Transform Local fields to static. Example: "testField" to "TEST_FIELD"
-    public static String toFieldStaticName(final String fieldName) {
+    public static String toFieldStaticName(final @NotNull String fieldName) {
         if (fieldName.indexOf('_') != -1) { // Is already a constant field
             return fieldName;
         }
@@ -30,7 +31,7 @@ public final class JavaFieldNames {
     }
 
     // Transform Static field names to local. Example: "TEST_FIELD" to "testField"
-    public static String toFieldLocalName(final String fieldName) {
+    public static String toFieldLocalName(final @NotNull String fieldName) {
         final StringBuilder result = new StringBuilder();
         final int length = fieldName.length();
 

@@ -8,24 +8,26 @@ import ink.reactor.fission.format.JavaFormalizable;
 import ink.reactor.fission.format.JavaOutputFormalizable;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 @Setter
 public class JavaAnnotation implements JavaFormalizable {
 
-    private String type;
+    private @NonNull String type;
     private Collection<JavaAnnotationEntry> entries;
 
-    public JavaAnnotation(String type) {
+    public JavaAnnotation(@NonNull String type) {
         this.type = type;
     }
 
-    public JavaAnnotation(Class<?> type) {
+    public JavaAnnotation(@NonNull Class<?> type) {
         this.type = type.getSimpleName();
     }
 
-    public <T> JavaAnnotation addEntry(final String key, final Object value) {
+    public <T> JavaAnnotation addEntry(final @NonNull String key, final Object value) {
         if (this.entries == null) {
             this.entries = new ArrayList<>();
         }
@@ -33,7 +35,7 @@ public class JavaAnnotation implements JavaFormalizable {
         return this;
     }
 
-    public JavaAnnotation addEntry(JavaAnnotationEntry... javaAnnotationEntries) {
+    public JavaAnnotation addEntry(@NonNull JavaAnnotationEntry... javaAnnotationEntries) {
         if (this.entries == null) {
             this.entries = new ArrayList<>();
         }
@@ -48,7 +50,7 @@ public class JavaAnnotation implements JavaFormalizable {
         write(builder, options);
     }
 
-    public void write(final StringBuilder builder, final JavaFormatOptions options) {
+    public void write(final @NotNull StringBuilder builder, final @NotNull JavaFormatOptions options) {
         options.getAnnotationWriter().write(this, builder, options);
     }
 

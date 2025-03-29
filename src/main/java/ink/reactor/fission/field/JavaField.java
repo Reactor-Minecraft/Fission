@@ -10,6 +10,7 @@ import ink.reactor.fission.format.JavaFormalizable;
 import ink.reactor.fission.format.JavaOutputFormalizable;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Setter
@@ -24,16 +25,16 @@ public class JavaField implements JavaFormalizable, AnnotationHelper {
     private boolean isFinal = false;
 
     // Content
-    private String type;
-    private String name;
+    private @NonNull String type;
+    private @NonNull String name;
     private String value;
 
-    public JavaField(String type, String name) {
+    public JavaField(@NonNull String type, @NonNull String name) {
         this.type = type;
         this.name = name;
     }
 
-    public JavaField(String type, String name, String value) {
+    public JavaField(@NonNull String type, @NonNull String name, String value) {
         this.type = type;
         this.name = name;
         this.value = value;

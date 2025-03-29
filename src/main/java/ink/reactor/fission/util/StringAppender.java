@@ -4,16 +4,17 @@ import java.util.Collection;
 
 import ink.reactor.fission.JavaVisibility;
 import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.NotNull;
 
 @UtilityClass
 public final class StringAppender {
 
-    public static void appendCharWithIndentation(final StringBuilder builder, final char character, final int spaces) {
+    public static void appendCharWithIndentation(final @NotNull StringBuilder builder, final char character, final int spaces) {
         builder.repeat(' ', spaces);
         builder.append(character);
     }
 
-    public static void appendLinesWithIndentation(final StringBuilder builder, final Collection<String> lines, final int spaces) {
+    public static void appendLinesWithIndentation(final @NotNull StringBuilder builder, final Collection<String> lines, final int spaces) {
         if (lines == null || lines.isEmpty()) {
             return;
         }
@@ -30,12 +31,12 @@ public final class StringAppender {
         }
     }
 
-    public static void appendWithIndentation(final StringBuilder builder, final String line, final int spaces) {
+    public static void appendWithIndentation(final @NotNull StringBuilder builder, final @NotNull String line, final int spaces) {
         builder.repeat(' ', spaces);
         builder.append(line);
     }
 
-    public static void appendWithSpace(final StringBuilder builder, final String line) {
+    public static void appendWithSpace(final @NotNull StringBuilder builder, final String line) {
         if (line == null || line.isEmpty()) {
             return;
         }
@@ -43,11 +44,11 @@ public final class StringAppender {
         builder.append(' ');
     }
 
-    public static void appendVisibility(final StringBuilder builder, final JavaVisibility visibility) {
+    public static void appendVisibility(final @NotNull StringBuilder builder, final @NotNull JavaVisibility visibility) {
         appendWithSpace(builder, visibility.getKeyword());
     }
 
-    public static void appendLinesWithIndentation(final StringBuilder builder, final String lines, final int indentation) {
+    public static void appendLinesWithIndentation(final @NotNull StringBuilder builder, final String lines, final int indentation) {
         if (lines != null) {
             appendLinesWithIndentation(builder, StringSplitter.split(lines, '\n'), indentation);
         }

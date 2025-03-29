@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.NotNull;
 
 @UtilityClass
 public final class StringSplitter {
@@ -15,7 +16,7 @@ public final class StringSplitter {
      * @param character delimiter character
      * @return a list of all strings
      */
-    public static List<String> split(final String text, final char character) {
+    public static List<String> split(final @NotNull String text, final char character) {
         final ArrayList<String> list = new ArrayList<>();
         int start = 0;
         int index;
@@ -41,7 +42,7 @@ public final class StringSplitter {
      * @param charToFound to split and ignore if found extra
      * @return a list of all split
      */
-    public static List<String> splitIgnoreExtra(final String text, final char charToFound) {
+    public static List<String> splitIgnoreExtra(final @NotNull String text, final char charToFound) {
         final ArrayList<String> list = new ArrayList<>();
         int length = text.length();
         int start = -1;

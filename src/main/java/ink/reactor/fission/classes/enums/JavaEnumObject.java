@@ -13,6 +13,7 @@ import ink.reactor.fission.format.JavaFormalizable;
 import ink.reactor.fission.format.JavaOutputFormalizable;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
@@ -26,7 +27,7 @@ public class JavaEnumObject implements JavaFormalizable, AnnotationHelper {
     private Object commentary;
 
     // Content
-    private final String name;
+    private @NonNull String name;
     private Collection<Object> parameters;
     private JavaClass classInside;
 

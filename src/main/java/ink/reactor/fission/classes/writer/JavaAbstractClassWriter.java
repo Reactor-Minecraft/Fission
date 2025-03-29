@@ -4,6 +4,7 @@ import ink.reactor.fission.classes.JavaClass;
 import ink.reactor.fission.format.JavaFormatOptions;
 import ink.reactor.fission.method.JavaMethod;
 import ink.reactor.fission.util.StringAppender;
+import org.jetbrains.annotations.NotNull;
 
 public class JavaAbstractClassWriter extends JavaClassWriter {
 
@@ -15,7 +16,11 @@ public class JavaAbstractClassWriter extends JavaClassWriter {
     }
 
     @Override
-    public void writeMethods(JavaClass javaClass, StringBuilder builder, JavaFormatOptions options) {     
+    public void writeMethods(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         int i = 0;
         for (final JavaMethod method : javaClass.getMethods()) {
             if (i++ != 0) {

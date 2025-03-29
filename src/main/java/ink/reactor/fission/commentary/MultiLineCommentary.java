@@ -4,13 +4,14 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import ink.reactor.fission.util.StringSplitter;
+import org.jetbrains.annotations.NotNull;
 
 public record MultiLineCommentary(Collection<String> lines) {
-    public static MultiLineCommentary of(final String... lines) {
+    public static MultiLineCommentary of(final @NotNull String... lines) {
         return new MultiLineCommentary(Arrays.asList(lines));
     }
 
-    public static MultiLineCommentary of(final String lines) {
+    public static MultiLineCommentary of(final @NotNull String lines) {
         return new MultiLineCommentary(StringSplitter.split(lines, '\n'));
     }
 

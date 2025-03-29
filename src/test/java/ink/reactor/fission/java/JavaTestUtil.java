@@ -72,8 +72,8 @@ public final class JavaTestUtil {
             new JavaMethod("emptyMethod")
         );
 
-        JavaConstructor.add(javaClass);
-        JavaGetterAndSetters.add(javaClass);
+        JavaConstructor.DEFAULT.add(javaClass);
+        JavaGetterAndSetters.DEFAULT.add(javaClass);
 
         return javaClass;
     }

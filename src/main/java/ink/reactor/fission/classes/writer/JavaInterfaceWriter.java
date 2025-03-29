@@ -5,6 +5,7 @@ import ink.reactor.fission.field.JavaField;
 import ink.reactor.fission.format.JavaFormatOptions;
 import ink.reactor.fission.method.JavaMethod;
 import ink.reactor.fission.util.StringAppender;
+import org.jetbrains.annotations.NotNull;
 
 public class JavaInterfaceWriter extends JavaClassWriter {
 
@@ -16,7 +17,11 @@ public class JavaInterfaceWriter extends JavaClassWriter {
     }
 
     @Override
-    public void writeFields(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeFields(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (!javaClass.hasFields()) {
             return;
         }
@@ -41,7 +46,11 @@ public class JavaInterfaceWriter extends JavaClassWriter {
     }
 
     @Override
-    public void writeMethods(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeMethods(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (!javaClass.hasMethods()) {
             return;
         }

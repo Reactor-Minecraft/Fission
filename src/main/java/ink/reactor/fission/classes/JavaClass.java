@@ -16,6 +16,7 @@ import ink.reactor.fission.format.JavaOutputFormalizable;
 import ink.reactor.fission.method.JavaMethod;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -25,12 +26,12 @@ public class JavaClass implements JavaFormalizable, AnnotationHelper {
     // Header
     private Collection<JavaAnnotation> annotations;
     private Object commentary;
-    private final String packageName;
-    private JavaVisibility visibility = JavaVisibility.PUBLIC;
+    private String packageName;
+    private @NonNull JavaVisibility visibility = JavaVisibility.PUBLIC;
     private boolean isStatic = false;
     private boolean isFinal = false;
-    private JavaClassType classType = JavaClassType.CLASS;
-    private final String className;
+    private @NonNull JavaClassType classType = JavaClassType.CLASS;
+    private @NonNull String className;
 
     // Content
     private Collection<JavaField> fields;
@@ -38,17 +39,17 @@ public class JavaClass implements JavaFormalizable, AnnotationHelper {
     private Collection<String> imports;
     private Collection<JavaClass> subClasses;
 
-    public JavaClass(String className) {
+    public JavaClass(@NonNull String className) {
         this.packageName = null;
         this.className = className;
     }
 
-    public JavaClass(String packageName, String className) {
+    public JavaClass(@NonNull String packageName, @NonNull String className) {
         this.packageName = packageName;
         this.className = className;
     }
 
-    public void addFields(final JavaField... javaFields) {
+    public void addFields(final @NonNull JavaField... javaFields) {
         if (javaFields.length == 0) {
             return;
         }
@@ -60,7 +61,7 @@ public class JavaClass implements JavaFormalizable, AnnotationHelper {
         }
     }
 
-    public void addMethods(final JavaMethod... javaMethods) {
+    public void addMethods(final @NonNull JavaMethod... javaMethods) {
         if (javaMethods.length == 0) {
             return;
         }
@@ -72,7 +73,7 @@ public class JavaClass implements JavaFormalizable, AnnotationHelper {
         }
     }
 
-    public void addImports(final String... javaImports) {
+    public void addImports(final @NonNull String... javaImports) {
         if (javaImports.length == 0) {
             return;
         }
@@ -84,7 +85,7 @@ public class JavaClass implements JavaFormalizable, AnnotationHelper {
         }
     }
 
-    public void addImports(final Class<?>... javaImports) {
+    public void addImports(final @NonNull Class<?>... javaImports) {
         if (javaImports.length == 0) {
             return;
         }
@@ -94,15 +95,15 @@ public class JavaClass implements JavaFormalizable, AnnotationHelper {
         for (final Class<?> javaImport : javaImports) {
             String importPath = javaImport.getPackageName();
             if (importPath.isEmpty()) {
-                importPath = javaImport.getClass().getSimpleName();
+                importPath = javaImport.getSimpleName();
             } else {
-                importPath = importPath + '.' + javaImport.getClass().getSimpleName();
+                importPath = importPath + '.' + javaImport.getSimpleName();
             }
             this.imports.add(importPath);
         }
     }
 
-    public void addSubclass(final JavaClass... javaSubClasses) {
+    public void addSubclass(final @NonNull JavaClass... javaSubClasses) {
         if (javaSubClasses.length == 0) {
             return;
         }

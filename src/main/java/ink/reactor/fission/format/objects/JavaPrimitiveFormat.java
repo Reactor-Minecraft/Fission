@@ -4,17 +4,18 @@ import java.util.Map;
 
 import ink.reactor.fission.format.JavaFormalizable;
 import ink.reactor.fission.util.ArrayAppender;
+import org.jetbrains.annotations.NotNull;
 
 public final class JavaPrimitiveFormat {
 
-    public static void loadAll(final Map<Class<?>, JavaFormalizable> formalizableMap) {
+    public static void loadAll(final @NotNull Map<Class<?>, JavaFormalizable> formalizableMap) {
         addStringFormat(formalizableMap);
         addArrayFormat(formalizableMap);
         addBooleanFormat(formalizableMap);
         addNumbersFormat(formalizableMap);
     }
 
-    public static void addBooleanFormat(final Map<Class<?>, JavaFormalizable> formalizableMap) {
+    public static void addBooleanFormat(final @NotNull Map<Class<?>, JavaFormalizable> formalizableMap) {
         formalizableMap.put(Boolean.class, (object, options, builder, values) -> {
             if (object instanceof Boolean boolean1) {
                 builder.append(boolean1.booleanValue());
@@ -24,7 +25,7 @@ public final class JavaPrimitiveFormat {
         });
     }
 
-    public static void addNumbersFormat(final Map<Class<?>, JavaFormalizable> formalizableMap) {
+    public static void addNumbersFormat(final @NotNull Map<Class<?>, JavaFormalizable> formalizableMap) {
         final JavaFormalizable defaultFormalizable = (object, options, builder, values) -> builder.append(object.toString());
         formalizableMap.put(Byte.class, defaultFormalizable);
         formalizableMap.put(Short.class, defaultFormalizable);
@@ -35,7 +36,7 @@ public final class JavaPrimitiveFormat {
         formalizableMap.put(Double.class, defaultFormalizable);
     }
 
-    public static void addStringFormat(final Map<Class<?>, JavaFormalizable> formalizableMap) {
+    public static void addStringFormat(final @NotNull Map<Class<?>, JavaFormalizable> formalizableMap) {
         formalizableMap.put(String.class, (object, options, builder, values) -> {
             if (options.isAddStringQuoteMarks()) {
                 builder.append('"');
@@ -61,7 +62,7 @@ public final class JavaPrimitiveFormat {
         });
     }
 
-    public static void addArrayFormat(final Map<Class<?>, JavaFormalizable> formalizableMap) {
+    public static void addArrayFormat(final @NotNull Map<Class<?>, JavaFormalizable> formalizableMap) {
         formalizableMap.put(byte[].class, (object, options, builder, values) -> {
             if (options.isAddByteArrayPrefix()) {
                 builder.append("new byte[] {");

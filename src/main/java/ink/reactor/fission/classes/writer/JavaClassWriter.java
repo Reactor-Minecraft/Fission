@@ -12,6 +12,7 @@ import ink.reactor.fission.util.StringAppender;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 @Setter
@@ -30,7 +31,7 @@ public class JavaClassWriter {
         return "class";
     }
 
-    public static JavaClassWriter getWriterByClassType(final JavaClassType classType) {
+    public static JavaClassWriter getWriterByClassType(final @NotNull JavaClassType classType) {
         return switch (classType) {
             case RECORD -> JavaRecordWriter.DEFAULT;
             case ABSTRACT_CLASS -> JavaAbstractClassWriter.DEFAULT;
@@ -40,7 +41,11 @@ public class JavaClassWriter {
         };
     }
 
-    public void writeClass(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeClass(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         writeImportAndPackage(javaClass, builder, options);
         if (javaClass.hasImports()) {
             builder.repeat('\n', newLinesBetweenImportsAndClass);
@@ -48,7 +53,7 @@ public class JavaClassWriter {
         writeClassWithoutImportsAndPackage(javaClass, builder, options, false);
     }
 
-    public void writeImportAndPackage(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeImportAndPackage(final @NotNull JavaClass javaClass, final @NotNull StringBuilder builder, final @NotNull JavaFormatOptions options) {
         if (javaClass.hasCommentary()) {
             options.getCommentaryWriter().write(builder, javaClass.getCommentary());
             builder.append('\n');
@@ -60,7 +65,7 @@ public class JavaClassWriter {
         writeImports(javaClass, builder);
     }
 
-    public void writeImports(final JavaClass javaClass, final StringBuilder builder) {
+    public void writeImports(final @NotNull JavaClass javaClass, final @NotNull StringBuilder builder) {
         if (!javaClass.hasImports()) {
             return;
         }
@@ -69,7 +74,12 @@ public class JavaClassWriter {
         }
     }
 
-    public void writeClassWithoutImportsAndPackage(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options, final boolean writeCommentary) {
+    public void writeClassWithoutImportsAndPackage(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options,
+            final boolean writeCommentary
+    ) {
         if (writeCommentary && javaClass.hasCommentary()) {
             options.getCommentaryWriter().write(builder, javaClass.getCommentary());
             builder.append('\n');
@@ -91,7 +101,11 @@ public class JavaClassWriter {
         builder.append('}');
     }
 
-    public void writeClassContent(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeClassContent(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (javaClass.hasFields()) {
             builder.append('\n');
             writeFields(javaClass, builder, options);
@@ -109,7 +123,11 @@ public class JavaClassWriter {
         }
     }
 
-    public void writeClassStart(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeClassStart(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         StringAppender.appendVisibility(builder, javaClass.getVisibility());
 
         if (javaClass.isStatic()) {
@@ -123,7 +141,11 @@ public class JavaClassWriter {
         builder.append(javaClass.getClassName());
     }
 
-    public void writeFields(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeFields(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (!javaClass.hasFields()) {
             return;
         }
@@ -146,7 +168,12 @@ public class JavaClassWriter {
         builder.append('\n');
     }
 
-    public void writeFieldsPredicate(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options, final Predicate<JavaField> predicate) {
+    public void writeFieldsPredicate(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options,
+            final @NotNull Predicate<JavaField> predicate
+    ) {
         int i = 0;
         for (final JavaField javaField : javaClass.getFields()) {
             if (!predicate.test(javaField)) {
@@ -163,7 +190,11 @@ public class JavaClassWriter {
         }
     }
 
-    public void writeMethods(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeMethods(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (!javaClass.hasMethods()) {
             return;
         }
@@ -179,7 +210,11 @@ public class JavaClassWriter {
         }
     }
 
-    public void writeSubClasses(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeSubClasses(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (!javaClass.hasSubClasses()) {
             return;
         }

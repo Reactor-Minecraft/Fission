@@ -7,6 +7,7 @@ import ink.reactor.fission.annotation.JavaAnnotation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @AllArgsConstructor
@@ -14,26 +15,26 @@ import lombok.Setter;
 @Setter
 public class JavaMethodParameter implements AnnotationHelper {
     private Collection<JavaAnnotation> annotations;
-    private String type, name;
+    private @NonNull String type, name;
     private boolean isFinal = false;
 
-    public JavaMethodParameter(String clazz, String name) {
+    public JavaMethodParameter(@NonNull String clazz, @NonNull String name) {
         this.type = clazz;
         this.name = name;
     }
 
-    public JavaMethodParameter(Class<?> clazz, String name) {
+    public JavaMethodParameter(@NonNull Class<?> clazz, @NonNull String name) {
         this.type = clazz.getSimpleName();
         this.name = name;
     }
 
-    public JavaMethodParameter(Class<?> clazz, String name, boolean isFinal) {
+    public JavaMethodParameter(@NonNull Class<?> clazz, @NonNull String name, boolean isFinal) {
         this.type = clazz.getSimpleName();
         this.name = name;
         this.isFinal = isFinal;
     }
 
-    public JavaMethodParameter(String clazz, String name, boolean isFinal) {
+    public JavaMethodParameter(@NonNull String clazz, @NonNull String name, boolean isFinal) {
         this.type = clazz;
         this.name = name;
         this.isFinal = isFinal;

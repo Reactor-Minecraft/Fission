@@ -1,5 +1,7 @@
 package ink.reactor.fission.annotation;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -12,7 +14,7 @@ public interface AnnotationHelper {
         return getAnnotations() != null && !getAnnotations().isEmpty();
     }
 
-    default void addAnnotations(final JavaAnnotation... javaAnnotations) {
+    default void addAnnotations(final @NotNull JavaAnnotation... javaAnnotations) {
         if (getAnnotations() == null) {
             setAnnotations(new ArrayList<>(javaAnnotations.length));
         }
@@ -21,21 +23,21 @@ public interface AnnotationHelper {
         }
     }
 
-    default JavaAnnotation addAnnotation(final JavaAnnotation javaannotation) {
+    default JavaAnnotation addAnnotation(final @NotNull JavaAnnotation javaAnnotation) {
         if (getAnnotations() == null) {
             setAnnotations(new ArrayList<>());
         }
-        getAnnotations().add(javaannotation);
-        return javaannotation;
+        getAnnotations().add(javaAnnotation);
+        return javaAnnotation;
     }
 
-    default JavaAnnotation addAnnotation(final Class<?> annotation) {
+    default JavaAnnotation addAnnotation(final @NotNull Class<?> annotation) {
         final JavaAnnotation javaannotation = new JavaAnnotation(annotation);
         addAnnotation(javaannotation);
         return javaannotation;
     }
 
-    default JavaAnnotation addAnnotation(final String type) {
+    default JavaAnnotation addAnnotation(final @NotNull String type) {
         final JavaAnnotation javaannotation = new JavaAnnotation(type);
         addAnnotation(javaannotation);
         return javaannotation;

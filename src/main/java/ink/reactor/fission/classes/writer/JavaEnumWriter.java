@@ -9,6 +9,7 @@ import ink.reactor.fission.format.JavaFormatter;
 import ink.reactor.fission.util.StringAppender;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 @Setter
@@ -24,14 +25,22 @@ public class JavaEnumWriter extends JavaClassWriter {
     }
 
     @Override
-    public void writeClass(JavaClass javaClass, StringBuilder builder, JavaFormatOptions options) {
+    public void writeClass(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (javaClass instanceof JavaEnum) {
             super.writeClass(javaClass, builder, options);
         }
     }
 
     @Override
-    public void writeClassContent(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeClassContent(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (!(javaClass instanceof JavaEnum javaEnum)) {
             return;
         }
@@ -45,7 +54,11 @@ public class JavaEnumWriter extends JavaClassWriter {
         super.writeClassContent(javaClass, builder, options);
     }
 
-    public void writeEnumObjects(final JavaEnum javaEnum, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeEnumObjects(
+            final @NotNull JavaEnum javaEnum,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         final int size = javaEnum.getEnumObjects().size();
 
         int i = 0;
@@ -63,7 +76,11 @@ public class JavaEnumWriter extends JavaClassWriter {
         }
     }
 
-    public void writeEnumObject(final JavaEnumObject enumObject, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeEnumObject(
+            final @NotNull JavaEnumObject enumObject,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         builder.append(enumObject.getName());
 
         if (enumObject.hasParameters()) {
@@ -87,7 +104,11 @@ public class JavaEnumWriter extends JavaClassWriter {
     }
 
     @Override
-    public void writeSubClasses(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeSubClasses(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         if (!javaClass.hasSubClasses()) {
             return;
         }
@@ -97,7 +118,11 @@ public class JavaEnumWriter extends JavaClassWriter {
         }
     }
 
-    public void writeEnumSubClass(final JavaClass javaClass, final StringBuilder builder, final JavaFormatOptions options) {
+    public void writeEnumSubClass(
+            final @NotNull JavaClass javaClass,
+            final @NotNull StringBuilder builder,
+            final @NotNull JavaFormatOptions options
+    ) {
         builder.append('\n');
 
         final StringBuilder subClassBuilder = new StringBuilder();

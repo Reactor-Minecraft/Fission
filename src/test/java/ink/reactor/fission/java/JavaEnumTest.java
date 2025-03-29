@@ -48,8 +48,8 @@ public class JavaEnumTest {
         JavaFields.FINAL.addInts(javaEnum, "testInt");
         JavaFields.FINAL.addFields(javaEnum, char[].class, "testChars");
 
-        JavaConstructor.add(javaEnum);
-        JavaGetterAndSetters.add(javaEnum);
+        JavaConstructor.DEFAULT.add(javaEnum);
+        JavaGetterAndSetters.DEFAULT.add(javaEnum);
 
         return javaEnum;
     }
